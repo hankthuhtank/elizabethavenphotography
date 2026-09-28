@@ -227,6 +227,12 @@
             object-fit: cover;
             border-radius: 28px;
             box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.28);
+            opacity: 1;
+            transition: opacity .45s ease;
+        }
+
+        .hero-image img.hero-changing {
+            opacity: 0;
         }
 
         /* ===================== ABOUT ===================== */
@@ -1502,8 +1508,34 @@
             if (!chosen) chosen = candidates[0];
             if (!chosen) return;
 
+            const preload = new Image();
+            preload.src = chosen.src;
+
+            try {
+                if (preload.decode) {
+                    await preload.decode();
+                } else {
+                    await new Promise((resolve, reject) => {
+                        preload.onload = resolve;
+                        preload.onerror = reject;
+                    });
+                }
+            } catch {
+                return;
+            }
+
+            heroPhoto.classList.add('hero-changing');
+
+            await new Promise(resolve => window.setTimeout(resolve, 450));
+
             heroPhoto.src = chosen.src;
             heroPhoto.alt = chosen.alt;
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    heroPhoto.classList.remove('hero-changing');
+                });
+            });
         }
 
         async function startHeroRotation() {
