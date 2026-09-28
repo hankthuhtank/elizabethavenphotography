@@ -1045,7 +1045,7 @@
                     <a href="#contact" class="hero-cta">Book your session</a>
                 </div>
                 <div class="hero-image reveal">
-                    <img src="assets/images/portfolio/couples/couple1.jpg" alt="Couple embracing at golden hour">
+                    <img id="hero-photo" src="assets/images/portfolio/couples/couple1.jpg" alt="Couple embracing at golden hour">
                 </div>
             </div>
         </section>
@@ -1435,6 +1435,7 @@
                 activeCategory = 'all';
                 renderSet(randomSet(1), false);
                 restartAutoRotate();
+                startHeroRotation();
             } catch (error) {
                 console.error('Could not load portfolio:', error);
                 collectionStatus.textContent = 'Portfolio photos could not be loaded right now.';
@@ -1462,6 +1463,64 @@
             galleryTabs.forEach(tab =>
                 tab.addEventListener('click', () => setCategory(tab.dataset.category))
             );
+        }
+
+        // ---------- Randomized hero photo ----------
+        const heroPhoto = document.getElementById('hero-photo');
+        let heroRotate;
+        let heroTargetRatio = 0;
+
+        function getImageRatio(src) {
+            return new Promise(resolve => {
+                const image = new Image();
+                image.onload = () => resolve(image.naturalWidth / image.naturalHeight);
+                image.onerror = () => resolve(0);
+                image.src = src;
+            });
+        }
+
+        async function chooseHeroPhoto() {
+            if (!portfolioPhotos.length || !heroPhoto) return;
+
+            const currentSrc = heroPhoto.getAttribute('src');
+            const candidates = portfolioPhotos
+                .filter(photo => photo.src !== currentSrc)
+                .sort(() => Math.random() - 0.5);
+
+            let chosen = null;
+
+            for (const photo of candidates.slice(0, 10)) {
+                const ratio = await getImageRatio(photo.src);
+                if (!ratio) continue;
+
+                if (!heroTargetRatio || Math.abs(ratio - heroTargetRatio) / heroTargetRatio <= 0.18) {
+                    chosen = photo;
+                    break;
+                }
+            }
+
+            if (!chosen) chosen = candidates[0];
+            if (!chosen) return;
+
+            heroPhoto.src = chosen.src;
+            heroPhoto.alt = chosen.alt;
+        }
+
+        async function startHeroRotation() {
+            if (!heroPhoto || !portfolioPhotos.length) return;
+
+            window.clearInterval(heroRotate);
+
+            if (heroPhoto.complete && heroPhoto.naturalWidth) {
+                heroTargetRatio = heroPhoto.naturalWidth / heroPhoto.naturalHeight;
+            } else {
+                heroTargetRatio = await getImageRatio(heroPhoto.getAttribute('src'));
+            }
+
+            await chooseHeroPhoto();
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            heroRotate = window.setInterval(chooseHeroPhoto, 8000);
         }
 
         const gallerySlots = Array.from(document.querySelectorAll('[data-gallery-slot]'));
