@@ -770,6 +770,76 @@
         }
 
         /* ===================== MOBILE NAV ===================== */
+        @media (max-width: 899px) {
+            .hero {
+                min-height: auto;
+                padding-top: 105px;
+                padding-bottom: 3.5rem;
+            }
+
+            .hero-grid {
+                position: relative;
+                grid-template-columns: minmax(0, 1.1fr) minmax(135px, .9fr);
+                gap: 1rem;
+                align-items: center;
+                padding-top: 105px;
+            }
+
+            .hero-mark {
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 118px;
+                margin: 0;
+            }
+
+            .hero-text h1 {
+                font-size: clamp(2.2rem, 10vw, 3.6rem);
+                margin-bottom: .15rem;
+            }
+
+            .hero-text .present {
+                font-size: clamp(2rem, 9vw, 3.2rem);
+                margin-bottom: 1rem;
+            }
+
+            .hero-text p {
+                font-size: .95rem;
+                margin-bottom: 1.15rem;
+            }
+
+            .hero-cta {
+                padding: 11px 18px;
+                font-size: .88rem;
+            }
+
+            .hero-image img {
+                width: 100%;
+                height: clamp(240px, 54vw, 360px);
+                max-height: none;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero-grid {
+                grid-template-columns: minmax(0, 1.05fr) minmax(120px, .95fr);
+                gap: .75rem;
+            }
+
+            .hero-text p {
+                font-size: .86rem;
+                line-height: 1.45;
+            }
+
+            .hero-image img {
+                height: clamp(220px, 58vw, 300px);
+                border-radius: 16px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
