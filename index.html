@@ -241,9 +241,12 @@
         .about-panel {
             max-width: 1200px;
             margin: 0 auto;
-            background: transparent;
-            border: 0;
-            box-shadow: none;
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.7);
+            border-radius: 32px;
+            box-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.18);
             padding: 3.5rem 2rem;
         }
 
@@ -668,9 +671,12 @@
         .contact-card {
             max-width: 640px;
             margin: 0 auto;
-            background: transparent;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 26px;
             padding: 3rem 1.6rem;
-            box-shadow: none;
+            box-shadow: 0 25px 60px -20px rgb(0 0 0 / 0.14);
         }
         @media (min-width: 600px) { .contact-card { padding: 3.2rem 2.6rem; } }
 
@@ -808,9 +814,9 @@
             }
 
             .hero-text h1 {
-                font-size: clamp(1.75rem, 7vw, 2.35rem);
-                line-height: .98;
-                margin-bottom: .2rem;
+                font-size: clamp(1.45rem, 5.8vw, 1.95rem);
+                line-height: 1.02;
+                margin-bottom: .28rem;
             }
 
             .hero-text .present {
@@ -937,7 +943,8 @@
             }
 
             .hero-text h1 {
-                font-size: clamp(1.62rem, 6.9vw, 1.95rem);
+                font-size: clamp(1.3rem, 5.5vw, 1.55rem);
+                line-height: 1.02;
             }
 
             .hero-text .present {
@@ -1033,9 +1040,9 @@
                 <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography" class="hero-mark-mobile">
                 <div class="hero-text reveal">
                     <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography" class="hero-mark">
-                    <h1>Capturing</h1>
-                    <div class="present">The Present</div>
-                    <p>Intimate portraits and honest moments in the golden light of Texas.</p>
+                    <h1>Natural Photography</h1>
+                    <div class="present">For Real Life.</div>
+                    <p>Couples, families, milestones, and all the moments in between.</p>
                     <a href="#contact" class="hero-cta">Book your session</a>
                 </div>
                 <div class="hero-image reveal">
