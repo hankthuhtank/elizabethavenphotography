@@ -1509,33 +1509,35 @@
             if (!chosen) return;
 
             const preload = new Image();
-            preload.src = chosen.src;
 
             try {
-                if (preload.decode) {
-                    await preload.decode();
-                } else {
-                    await new Promise((resolve, reject) => {
-                        preload.onload = resolve;
-                        preload.onerror = reject;
-                    });
-                }
+                await new Promise((resolve, reject) => {
+                    preload.onload = resolve;
+                    preload.onerror = reject;
+                    preload.src = chosen.src;
+                    if (preload.complete && preload.naturalWidth) resolve();
+                });
             } catch {
                 return;
             }
 
-            heroPhoto.classList.add('hero-changing');
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-            await new Promise(resolve => window.setTimeout(resolve, 450));
+            if (!reduceMotion) {
+                heroPhoto.classList.add('hero-changing');
+                await new Promise(resolve => window.setTimeout(resolve, 450));
+            }
 
             heroPhoto.src = chosen.src;
             heroPhoto.alt = chosen.alt;
 
-            requestAnimationFrame(() => {
+            if (!reduceMotion) {
                 requestAnimationFrame(() => {
-                    heroPhoto.classList.remove('hero-changing');
+                    requestAnimationFrame(() => {
+                        heroPhoto.classList.remove('hero-changing');
+                    });
                 });
-            });
+            }
         }
 
         async function startHeroRotation() {
@@ -1551,7 +1553,6 @@
 
             await chooseHeroPhoto();
 
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
             heroRotate = window.setInterval(chooseHeroPhoto, 8000);
         }
 
@@ -1616,8 +1617,10 @@
 
         function restartAutoRotate() {
             window.clearInterval(autoRotate);
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            autoRotate = window.setInterval(() => renderSet(randomSet(1)), 6500);
+            autoRotate = window.setInterval(() => {
+                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                renderSet(randomSet(1), !reduceMotion);
+            }, 6500);
         }
 
         function setCategory(category) {
