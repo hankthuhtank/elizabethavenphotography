@@ -777,16 +777,16 @@
                 min-height: calc(100svh - 72px);
                 padding-top: 80px;
                 padding-bottom: 24px;
-                align-items: stretch;
+                align-items: flex-start;
             }
 
             .hero-grid {
-                min-height: calc(100svh - 112px);
-                grid-template-columns: minmax(0, 1.08fr) minmax(135px, .92fr);
-                grid-template-rows: auto 1fr;
+                grid-template-columns: minmax(0, .95fr) minmax(150px, 1.05fr);
+                grid-template-rows: auto auto;
                 column-gap: 1rem;
-                row-gap: .9rem;
+                row-gap: .85rem;
                 align-items: center;
+                align-content: start;
                 padding-top: 0;
             }
 
@@ -795,7 +795,7 @@
                 grid-column: 1 / -1;
                 grid-row: 1;
                 justify-self: center;
-                width: clamp(150px, 36vw, 190px);
+                width: clamp(190px, 46vw, 240px);
                 height: auto;
                 margin: 0;
             }
@@ -845,7 +845,7 @@
 
             .hero-image img {
                 width: 100%;
-                height: clamp(190px, 48vw, 270px);
+                height: clamp(235px, 55vw, 320px);
                 max-height: none;
                 object-fit: cover;
                 border-radius: 18px;
@@ -920,14 +920,13 @@
             }
 
             .hero-grid {
-                min-height: calc(100svh - 100px);
-                grid-template-columns: minmax(0, 1.08fr) minmax(122px, .92fr);
-                column-gap: .72rem;
-                row-gap: .6rem;
+                grid-template-columns: minmax(0, .92fr) minmax(145px, 1.08fr);
+                column-gap: .78rem;
+                row-gap: .7rem;
             }
 
             .hero-mark-mobile {
-                width: 148px;
+                width: 218px;
             }
 
             .hero-text h1 {
@@ -949,7 +948,7 @@
             }
 
             .hero-image img {
-                height: clamp(178px, 49vw, 228px);
+                height: clamp(225px, 58vw, 275px);
                 border-radius: 15px;
             }
 
