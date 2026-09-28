@@ -861,12 +861,8 @@
 
             <div class="collection-shell reveal" id="collection-shell">
                 <div class="collection-toolbar">
-                    <div class="collection-tabs" aria-label="Filter portfolio">
+                    <div class="collection-tabs" id="collection-tabs" aria-label="Filter portfolio">
                         <button class="collection-tab active" type="button" data-category="all">All</button>
-                        <button class="collection-tab" type="button" data-category="couples">Couples</button>
-                        <button class="collection-tab" type="button" data-category="families">Families</button>
-                        <button class="collection-tab" type="button" data-category="seniors">Seniors</button>
-                        <button class="collection-tab" type="button" data-category="headshots">Headshots</button>
                     </div>
                     <div class="gallery-controls" aria-label="Portfolio controls">
                         <button class="gallery-control" id="gallery-prev" type="button" aria-label="Previous photos">←</button>
@@ -1161,40 +1157,97 @@
         });
 
         // ---------- Rotating portfolio ----------
-        const portfolioPhotos = [
-            { src: 'assets/images/portfolio/couples/couple1.jpg', category: 'couples', label: 'Couples', alt: 'Couple embracing outdoors at golden hour' },
-            { src: 'assets/images/portfolio/couples/couple2.jpg', category: 'couples', label: 'Couples', alt: 'Couple walking together through an open room' },
-            { src: 'assets/images/portfolio/couples/couple3.jpg', category: 'couples', label: 'Couples', alt: 'Couple sharing a close candid moment indoors' },
-            { src: 'assets/images/portfolio/couples/couple4.jpg', category: 'couples', label: 'Couples', alt: 'Couple sitting together in soft outdoor light' },
-            { src: 'assets/images/portfolio/couples/couple5.jpg', category: 'couples', label: 'Couples', alt: 'Expecting couple standing together outdoors' },
-            { src: 'assets/images/portfolio/couples/couple6.jpg', category: 'couples', label: 'Couples', alt: 'Expecting couple photographed in warm natural light' },
+        let portfolioPhotos = [];
 
-            { src: 'assets/images/portfolio/families/family1.jpg', category: 'families', label: 'Families', alt: 'Family portrait outdoors' },
-            { src: 'assets/images/portfolio/families/family2.jpg', category: 'families', label: 'Families', alt: 'Family walking together outdoors' },
-            { src: 'assets/images/portfolio/families/family3.jpg', category: 'families', label: 'Families', alt: 'Family sharing a candid moment outdoors' },
-            { src: 'assets/images/portfolio/families/family4.jpg', category: 'families', label: 'Families', alt: 'Multi-generation family portrait' },
-            { src: 'assets/images/portfolio/families/family5.jpg', category: 'families', label: 'Families', alt: 'Maternity portrait in a garden setting' },
-            { src: 'assets/images/portfolio/families/family6.jpg', category: 'families', label: 'Families', alt: 'Family portrait in warm outdoor light' },
-            { src: 'assets/images/portfolio/families/family7.jpg', category: 'families', label: 'Families', alt: 'Parent holding a young child in a rustic interior' },
-            { src: 'assets/images/portfolio/families/family8.jpg', category: 'families', label: 'Families', alt: 'Children sitting together at an outdoor picnic setup' },
-            { src: 'assets/images/portfolio/families/family9.jpg', category: 'families', label: 'Families', alt: 'Parents looking toward their newborn baby' },
-            { src: 'assets/images/portfolio/families/family10.jpg', category: 'families', label: 'Families', alt: 'Close detail of a newborn foot held in an adult hand' },
+        const GALLERY_REPO = 'hankthuhtank/elizabethavenphotography';
+        const GALLERY_ROOT = 'assets/images/portfolio/';
+        const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif|avif)$/i;
 
-            { src: 'assets/images/portfolio/seniors/senior1.jpg', category: 'seniors', label: 'Seniors', alt: 'Senior portrait in warm outdoor light' },
-            { src: 'assets/images/portfolio/seniors/senior2.jpg', category: 'seniors', label: 'Seniors', alt: 'Senior portrait in a rustic setting' },
-            { src: 'assets/images/portfolio/seniors/senior3.jpg', category: 'seniors', label: 'Seniors', alt: 'Senior portrait beside a truck' },
-            { src: 'assets/images/portfolio/seniors/senior4.jpg', category: 'seniors', label: 'Seniors', alt: 'Graduate portrait outdoors in cap and gown' },
+        function categoryLabel(folderName) {
+            return folderName
+                .replace(/[-_]+/g, ' ')
+                .replace(/\b\w/g, char => char.toUpperCase());
+        }
 
-            { src: 'assets/images/portfolio/headshots/headshot1.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional headshot portrait' },
-            { src: 'assets/images/portfolio/headshots/headshot2.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional portrait in a bright setting' },
-            { src: 'assets/images/portfolio/headshots/headshot3.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional portrait with natural light' },
-            { src: 'assets/images/portfolio/headshots/headshot4.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional portrait in a library setting' },
-            { src: 'assets/images/portfolio/headshots/headshot5.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional portrait in front of a softly blurred stone wall' },
-            { src: 'assets/images/portfolio/headshots/headshot6.jpg', category: 'headshots', label: 'Headshots', alt: 'Professional portrait with warm indoor background' },
-        ];
+        function imagePath(path) {
+            return path.split('/').map(encodeURIComponent).join('/');
+        }
+
+        async function loadPortfolioPhotos() {
+            try {
+                const response = await fetch(
+                    `https://api.github.com/repos/${GALLERY_REPO}/git/trees/main?recursive=1`,
+                    { cache: 'no-store', headers: { Accept: 'application/vnd.github+json' } }
+                );
+                if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+
+                const data = await response.json();
+                const photos = (data.tree || [])
+                    .filter(item =>
+                        item.type === 'blob' &&
+                        item.path.startsWith(GALLERY_ROOT) &&
+                        IMAGE_EXTENSIONS.test(item.path)
+                    )
+                    .map(item => {
+                        const relative = item.path.slice(GALLERY_ROOT.length);
+                        const parts = relative.split('/');
+                        if (parts.length < 2) return null;
+
+                        const folder = parts[0];
+                        const category = folder.toLowerCase();
+                        const label = categoryLabel(folder);
+
+                        return {
+                            src: imagePath(item.path),
+                            category,
+                            label,
+                            alt: `${label} photography`
+                        };
+                    })
+                    .filter(Boolean)
+                    .sort((a, b) =>
+                        a.category.localeCompare(b.category) ||
+                        a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: 'base' })
+                    );
+
+                if (!photos.length) throw new Error('No portfolio photos found');
+
+                portfolioPhotos = photos;
+                buildCategoryTabs();
+                activeCategory = 'all';
+                renderSet(randomSet(1), false);
+                restartAutoRotate();
+            } catch (error) {
+                console.error('Could not load portfolio:', error);
+                collectionStatus.textContent = 'Portfolio photos could not be loaded right now.';
+            }
+        }
+
+        function buildCategoryTabs() {
+            const tabsContainer = document.getElementById('collection-tabs');
+            const categories = [...new Map(
+                portfolioPhotos.map(photo => [photo.category, photo.label])
+            ).entries()];
+
+            tabsContainer.innerHTML = '<button class="collection-tab active" type="button" data-category="all">All</button>';
+
+            categories.forEach(([category, label]) => {
+                const button = document.createElement('button');
+                button.className = 'collection-tab';
+                button.type = 'button';
+                button.dataset.category = category;
+                button.textContent = label;
+                tabsContainer.appendChild(button);
+            });
+
+            galleryTabs = Array.from(tabsContainer.querySelectorAll('.collection-tab'));
+            galleryTabs.forEach(tab =>
+                tab.addEventListener('click', () => setCategory(tab.dataset.category))
+            );
+        }
 
         const gallerySlots = Array.from(document.querySelectorAll('[data-gallery-slot]'));
-        const galleryTabs = Array.from(document.querySelectorAll('.collection-tab'));
+        let galleryTabs = [];
         const collectionStatus = document.getElementById('collection-status');
         const modal = document.getElementById('gallery-modal');
         const modalGrid = document.getElementById('full-gallery-grid');
@@ -1265,7 +1318,6 @@
             restartAutoRotate();
         }
 
-        galleryTabs.forEach(tab => tab.addEventListener('click', () => setCategory(tab.dataset.category)));
         document.getElementById('gallery-prev').addEventListener('click', () => cycleGallery(-1));
         document.getElementById('gallery-next').addEventListener('click', () => cycleGallery(1));
         document.getElementById('gallery-shuffle').addEventListener('click', () => cycleGallery(1));
@@ -1311,8 +1363,7 @@
         modal.addEventListener('click', (event) => { if (event.target === modal) closeGalleryModal(); });
         document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal.classList.contains('open')) closeGalleryModal(); });
 
-        renderSet(randomSet(1), false);
-        restartAutoRotate();
+        loadPortfolioPhotos();
 
         // ---------- Scroll reveal ----------
         const reveals = document.querySelectorAll('.reveal');
