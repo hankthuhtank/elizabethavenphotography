@@ -1,1787 +1,2257 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-
-    <!-- Open Graph / Social Media Preview (fixes link share image to logo.png) -->
-    <meta property="og:title" content="Elizabeth Aven Photography">
-    <meta property="og:description" content="Capturing the present — intimate portraits and honest moments in the golden light of Texas.">
-    <meta property="og:image" content="https://www.elizabethavenphotography.com/assets/images/branding/logo.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://www.elizabethavenphotography.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="Elizabeth Aven">
-
+  <head>
     
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Elizabeth Aven Photography" />
+    <meta
+      property="og:description"
+      content="Capturing the present — intimate portraits and honest moments in the golden light of Texas."
+    />
+    <meta
+      property="og:image"
+      content="https://www.elizabethavenphotography.com/assets/images/branding/logo.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:url" content="https://www.elizabethavenphotography.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Elizabeth Aven" />
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elizabeth Aven Photography • Navasota, TX</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Outfit:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        :root {
-            --cream: #F8F1E3;
-            --cream-deep: #F1E7D5;
-            --taupe: #A8896C;
-            --oak: #2C2522;
-            --ember: #C17F59;
-            --sage: #8B9A7D;
-            --ink-soft: #5C5148;
+      :root {
+        --cream: #f8f1e3;
+        --cream-deep: #f1e7d5;
+        --taupe: #a8896c;
+        --oak: #2c2522;
+        --ember: #c17f59;
+        --sage: #8b9a7d;
+        --ink-soft: #5c5148;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Outfit", system-ui, sans-serif;
+        /* soft, continuous warm wash so the particle layer reads everywhere */
+        background: radial-gradient(
+          120% 80% at 80% -10%,
+          #fcf7ec 0%,
+          var(--cream) 45%,
+          var(--cream-deep) 100%
+        );
+        background-attachment: fixed;
+        color: var(--oak);
+        line-height: 1.65;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      .serif {
+        font-family: "Cinzel", Georgia, serif;
+        font-weight: 700;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+      }
+
+      /* ============ AMBIENT PARTICLE FIELD (site-wide) ============ */
+      #bg-canvas {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        pointer-events: none;
+      }
+
+      /* everything sits above the canvas */
+      .nav,
+      main,
+      .footer {
+        position: relative;
+      }
+      main {
+        z-index: 1;
+      }
+
+      /* ===================== NAV ===================== */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(248, 241, 227, 0.82);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(44, 37, 34, 0.08);
+        z-index: 100;
+        padding: 0.7rem 1.25rem;
+      }
+
+      .nav-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+      }
+
+      /* transparent PNG — no disc, no shadow */
+      .logo img {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+        display: block;
+      }
+
+      .logo-text {
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        color: var(--oak);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.25rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        color: var(--oak);
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.2s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--ember);
+      }
+
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+      }
+
+      .hamburger span {
+        display: block;
+        width: 26px;
+        height: 2px;
+        background: var(--oak);
+        border-radius: 2px;
+        transition:
+          transform 0.3s ease,
+          opacity 0.3s ease;
+      }
+      .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .hamburger.open span:nth-child(2) {
+        opacity: 0;
+      }
+      .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+
+      .section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+      }
+
+      /* ===================== HERO ===================== */
+      .hero {
+        min-height: 100dvh;
+        display: flex;
+        align-items: center;
+        padding-top: 96px;
+        padding-bottom: 3rem;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+        width: 100%;
+      }
+
+      @media (min-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr 1.15fr;
+          gap: 4.5rem;
         }
+      }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+      .hero-mark {
+        display: block;
+        width: clamp(150px, 28vw, 230px);
+        height: auto;
+        margin: 0 auto 1.25rem;
+        opacity: 1;
+      }
 
-        html { scroll-behavior: smooth; }
+      .hero-mark-mobile {
+        display: none;
+      }
 
-        body {
-            font-family: 'Outfit', system-ui, sans-serif;
-            /* soft, continuous warm wash so the particle layer reads everywhere */
-            background:
-                radial-gradient(120% 80% at 80% -10%, #FCF7EC 0%, var(--cream) 45%, var(--cream-deep) 100%);
-            background-attachment: fixed;
-            color: var(--oak);
-            line-height: 1.65;
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+      .hero-text h1 {
+        font-size: clamp(3rem, 8.5vw, 6rem);
+        color: var(--taupe);
+        margin-bottom: 0.3rem;
+      }
+
+      .hero-text .present {
+        font-family: "Cinzel", Georgia, serif;
+        font-weight: 700;
+        font-size: clamp(2.7rem, 7.5vw, 5.4rem);
+        color: var(--oak);
+        line-height: 1.05;
+        margin-bottom: 1.6rem;
+      }
+
+      .hero-text p {
+        font-size: 1.1rem;
+        max-width: 440px;
+        color: var(--ink-soft);
+        margin-bottom: 2rem;
+      }
+
+      .hero-cta {
+        display: inline-block;
+        padding: 14px 30px;
+        background: var(--oak);
+        color: #fff;
+        text-decoration: none;
+        border-radius: 9999px;
+        font-size: 0.95rem;
+        letter-spacing: 0.6px;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+      .hero-cta:hover {
+        background: var(--ember);
+        transform: translateY(-2px);
+      }
+
+      .hero-image img {
+        width: 100%;
+        max-height: 720px;
+        object-fit: cover;
+        border-radius: 28px;
+        box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.28);
+        opacity: 1;
+        transition: opacity 0.45s ease;
+      }
+
+      .hero-image img.hero-changing {
+        opacity: 0;
+      }
+
+      /* ===================== ABOUT ===================== */
+      .about {
+        padding: 6.5rem 0;
+      }
+
+      .about-panel {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.62);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.7);
+        border-radius: 32px;
+        box-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.18);
+        padding: 3.5rem 2rem;
+      }
+
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+
+      @media (min-width: 900px) {
+        .about-panel {
+          padding: 4rem 4rem;
         }
-
-        h1, h2, h3, .serif {
-            font-family: 'Cinzel', Georgia, serif;
-            font-weight: 700;
-            line-height: 1.05;
-            letter-spacing: -0.02em;
+        .about-grid {
+          grid-template-columns: 1fr 1.05fr;
+          gap: 5rem;
         }
+      }
 
-        /* ============ AMBIENT PARTICLE FIELD (site-wide) ============ */
-        #bg-canvas {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
+      .about-text .label {
+        font-size: 0.82rem;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--taupe);
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      .about-text h2 {
+        font-size: clamp(2.4rem, 5.2vw, 3.6rem);
+        margin-bottom: 1.5rem;
+      }
+
+      .about-text p {
+        font-size: 1.05rem;
+        color: var(--ink-soft);
+        margin-bottom: 1.3rem;
+      }
+
+      .about-text .about-signoff {
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: var(--oak);
+        margin-top: 0.15rem;
+      }
+
+      .portrait-frame {
+        position: relative;
+        max-width: 460px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .portrait-frame img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* ===================== MEMORY COLLECTION ===================== */
+      .memory {
+        padding: 5.5rem 0;
+      }
+
+      .section-eyebrow {
+        font-size: 0.82rem;
+        letter-spacing: 3.5px;
+        text-transform: uppercase;
+        color: var(--taupe);
+        margin-bottom: 0.8rem;
+        display: block;
+      }
+
+      .memory-header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        margin-bottom: 1.6rem;
+      }
+
+      .memory-header h2 {
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+        margin-bottom: 0.45rem;
+      }
+
+      .memory-intro {
+        max-width: 590px;
+        color: var(--ink-soft);
+        font-size: 1.02rem;
+      }
+
+      .collection-shell {
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        padding: clamp(1rem, 2vw, 1.5rem);
+        overflow: hidden;
+      }
+
+      .collection-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+      }
+
+      .collection-tabs {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+      }
+
+      .collection-tab,
+      .gallery-control,
+      .open-gallery,
+      .modal-close {
+        font: inherit;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .collection-tab {
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(248, 241, 227, 0.82);
+        color: var(--ink-soft);
+        border: 1px solid rgba(168, 137, 108, 0.18);
+        transition:
+          background 0.2s ease,
+          color 0.2s ease,
+          transform 0.2s ease;
+      }
+      .collection-tab:hover {
+        transform: translateY(-1px);
+      }
+      .collection-tab.active {
+        background: var(--oak);
+        color: #fff;
+      }
+
+      .gallery-controls {
+        display: flex;
+        gap: 0.45rem;
+      }
+      .gallery-control {
+        min-width: 42px;
+        height: 42px;
+        padding: 0 13px;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--oak);
+        border: 1px solid rgba(44, 37, 34, 0.1);
+        box-shadow: 0 8px 22px -14px rgb(0 0 0 / 0.28);
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+      .gallery-control:hover {
+        transform: translateY(-2px);
+        background: var(--cream);
+      }
+
+      .featured-gallery {
+        display: grid;
+        grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.72fr);
+        gap: 0.9rem;
+        min-height: 560px;
+      }
+
+      .gallery-side {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        gap: 0.9rem;
+        min-height: 0;
+      }
+
+      .gallery-card {
+        position: relative;
+        width: 100%;
+        min-height: 0;
+        overflow: hidden;
+        border: 0;
+        padding: 0;
+        border-radius: 22px;
+        background: #d8cbbb;
+        cursor: pointer;
+        box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.32);
+        isolation: isolate;
+      }
+
+      .gallery-card img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transform: scale(1.001);
+        transition:
+          opacity 0.45s ease,
+          transform 1.1s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .gallery-card:hover img {
+        transform: scale(1.025);
+      }
+      .gallery-card.is-changing img {
+        opacity: 0.24;
+      }
+
+      .gallery-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 52%, rgba(25, 20, 17, 0.68) 100%);
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      .gallery-card-main {
+        min-height: 560px;
+      }
+      .gallery-card-small {
+        min-height: 0;
+      }
+
+      .gallery-caption {
+        position: absolute;
+        z-index: 2;
+        left: 1.15rem;
+        right: 1.15rem;
+        bottom: 1rem;
+        color: #fff;
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+        text-align: left;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
+      }
+      .gallery-caption strong {
+        font-size: 1rem;
+        font-weight: 500;
+      }
+      .gallery-caption span {
+        font-size: 0.78rem;
+        opacity: 0.78;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .collection-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1rem 0.2rem 0.1rem;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+
+      .open-gallery {
+        padding: 11px 18px;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--oak);
+        border: 1px solid rgba(44, 37, 34, 0.18);
+        transition:
+          background 0.2s ease,
+          color 0.2s ease;
+      }
+      .open-gallery:hover {
+        background: var(--oak);
+        color: #fff;
+      }
+
+      /* full portfolio stays off the front page until requested */
+      .gallery-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        background: rgba(24, 19, 16, 0.78);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .gallery-modal.open {
+        display: flex;
+      }
+      .gallery-modal-panel {
+        width: min(1160px, 100%);
+        max-height: min(90dvh, 900px);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: var(--cream);
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        border-radius: 28px;
+        box-shadow: 0 35px 90px rgba(0, 0, 0, 0.3);
+      }
+      .gallery-modal-top {
+        flex: 0 0 auto;
+        z-index: 4;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.1rem 1.25rem;
+        background: rgba(248, 241, 227, 0.94);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(44, 37, 34, 0.08);
+      }
+      .gallery-modal-scroll {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        scrollbar-gutter: stable;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(168, 137, 108, 0.72) transparent;
+        margin: 0.35rem 0.35rem 0.45rem 0;
+        border-radius: 0 0 22px 22px;
+      }
+      .gallery-modal-scroll::-webkit-scrollbar {
+        width: 11px;
+      }
+      .gallery-modal-scroll::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .gallery-modal-scroll::-webkit-scrollbar-thumb {
+        background: rgba(168, 137, 108, 0.62);
+        border: 3px solid transparent;
+        background-clip: padding-box;
+        border-radius: 999px;
+      }
+      .gallery-modal-scroll::-webkit-scrollbar-thumb:hover {
+        background: rgba(92, 81, 72, 0.72);
+        background-clip: padding-box;
+      }
+      .gallery-modal-top h3 {
+        font-size: clamp(1.35rem, 3vw, 1.85rem);
+      }
+      .modal-close {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--oak);
+        color: #fff;
+        font-size: 1.25rem;
+      }
+      .full-gallery-grid {
+        columns: 2 230px;
+        column-gap: 0.8rem;
+        padding: 0.9rem;
+      }
+      .full-gallery-item {
+        width: 100%;
+        display: block;
+        break-inside: avoid;
+        margin: 0 0 0.8rem;
+        border: 0;
+        padding: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #ddd0c0;
+        cursor: pointer;
+      }
+      .full-gallery-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        transition: transform 0.5s ease;
+      }
+      .full-gallery-item:hover img {
+        transform: scale(1.025);
+      }
+      body.gallery-open {
+        overflow: hidden;
+      }
+
+      @media (max-width: 760px) {
+        .collection-toolbar {
+          align-items: flex-start;
         }
-
-        /* everything sits above the canvas */
-        .nav, main, .footer { position: relative; }
-        main { z-index: 1; }
-
-        /* ===================== NAV ===================== */
-        .nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            background: rgba(248, 241, 227, 0.82);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(44, 37, 34, 0.08);
-            z-index: 100;
-            padding: 0.7rem 1.25rem;
+        .gallery-controls {
+          width: 100%;
+          justify-content: flex-end;
         }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .featured-gallery {
+          grid-template-columns: 1fr;
+          min-height: 0;
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
+        .gallery-card-main {
+          min-height: 470px;
         }
-
-        /* transparent PNG — no disc, no shadow */
-        .logo img {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            display: block;
+        .gallery-side {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: none;
+          min-height: 210px;
         }
-
-        .logo-text {
-            font-family: 'Cinzel', Georgia, serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            color: var(--oak);
+        .gallery-card-small {
+          min-height: 210px;
         }
-
-        .nav-links {
-            display: flex;
-            gap: 2.25rem;
-            list-style: none;
+        .gallery-caption {
+          left: 0.9rem;
+          right: 0.9rem;
+          bottom: 0.8rem;
         }
-
-        .nav-links a {
-            color: var(--oak);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.2s ease;
+        .gallery-card-small .gallery-caption strong {
+          font-size: 0.88rem;
         }
-
-        .nav-links a:hover { color: var(--ember); }
-
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
+        .gallery-card-small .gallery-caption span {
+          display: none;
         }
-
-        .hamburger span {
-            display: block;
-            width: 26px;
-            height: 2px;
-            background: var(--oak);
-            border-radius: 2px;
-            transition: transform 0.3s ease, opacity 0.3s ease;
+        .collection-footer {
+          align-items: flex-start;
+          flex-direction: column;
         }
-        .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger.open span:nth-child(2) { opacity: 0; }
-        .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-        .section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
+        .open-gallery {
+          width: 100%;
         }
+      }
 
-        /* ===================== HERO ===================== */
+      @media (max-width: 480px) {
+        .gallery-card-main {
+          min-height: 410px;
+        }
+        .gallery-side {
+          min-height: 170px;
+        }
+        .gallery-card-small {
+          min-height: 170px;
+        }
+        .full-gallery-grid {
+          columns: 2 145px;
+          padding: 0.65rem;
+          column-gap: 0.65rem;
+        }
+        .full-gallery-item {
+          margin-bottom: 0.65rem;
+          border-radius: 12px;
+        }
+      }
+
+      /* ===================== PRICING ===================== */
+      .pricing {
+        padding: 5.5rem 0;
+      }
+
+      .pricing-panel {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: transparent;
+        border: 0;
+        box-shadow: none;
+        padding: 3.5rem 1.5rem;
+      }
+      @media (min-width: 900px) {
+        .pricing-panel {
+          padding: 4.5rem 3.5rem;
+        }
+      }
+
+      .pricing-header {
+        text-align: center;
+        max-width: 640px;
+        margin: 0 auto 3rem;
+      }
+      .pricing-header h2 {
+        font-size: clamp(2.4rem, 5vw, 3.6rem);
+        margin-bottom: 0.6rem;
+      }
+      .pricing-header p {
+        color: var(--ink-soft);
+        margin-top: 0.8rem;
+      }
+
+      .category {
+        margin-bottom: 3rem;
+      }
+      .category:last-child {
+        margin-bottom: 0;
+      }
+
+      .category-header {
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 1.3rem;
+        color: var(--ember);
+        margin-bottom: 1.1rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid rgba(168, 137, 108, 0.3);
+      }
+
+      .vibe-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.4rem;
+      }
+      @media (min-width: 680px) {
+        .vibe-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 1100px) {
+        .vibe-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .vibe-card {
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.1);
+        transition:
+          transform 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+          box-shadow 0.3s ease;
+        border: 1px solid #ede4d8;
+        display: flex;
+        flex-direction: column;
+      }
+      .vibe-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 22px 45px -12px rgb(0 0 0 / 0.15);
+      }
+      .vibe-card.selected {
+        border-color: var(--ember);
+        box-shadow: 0 0 0 4px rgba(193, 127, 89, 0.12);
+      }
+
+      .vibe-card-header {
+        padding: 1.5rem 1.8rem 1rem;
+      }
+      .vibe-card-header h3 {
+        font-size: 1.45rem;
+        color: var(--oak);
+        margin-bottom: 0.3rem;
+      }
+
+      .price {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--ember);
+      }
+      .price span {
+        font-size: 0.95rem;
+        font-weight: 400;
+        color: #8b7f72;
+      }
+
+      .vibe-details {
+        padding: 0 1.8rem 1.5rem;
+        flex: 1;
+      }
+      .vibe-details ul {
+        list-style: none;
+        font-size: 0.95rem;
+        color: var(--ink-soft);
+      }
+      .vibe-details li {
+        padding: 5px 0;
+        display: flex;
+        gap: 9px;
+      }
+      .vibe-details li::before {
+        content: "•";
+        color: var(--taupe);
+        font-size: 1.3rem;
+        line-height: 1;
+      }
+
+      .choose-btn {
+        margin: 0 1.8rem 1.8rem;
+        width: calc(100% - 3.6rem);
+        padding: 14px 24px;
+        background: var(--oak);
+        color: #fff;
+        border: none;
+        border-radius: 9999px;
+        font-size: 0.95rem;
+        font-weight: 500;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+        transition:
+          background 0.2s ease,
+          transform 0.2s ease;
+      }
+      .choose-btn:hover {
+        background: var(--ember);
+        transform: translateY(-2px);
+      }
+
+      /* ===================== CONTACT ===================== */
+      .contact {
+        padding: 5.5rem 0 6.5rem;
+      }
+
+      .contact-card {
+        max-width: 640px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 26px;
+        padding: 3rem 1.6rem;
+        box-shadow: 0 25px 60px -20px rgb(0 0 0 / 0.14);
+      }
+      @media (min-width: 600px) {
+        .contact-card {
+          padding: 3.2rem 2.6rem;
+        }
+      }
+
+      .contact-card h2 {
+        font-size: clamp(2rem, 5vw, 2.45rem);
+        text-align: center;
+        margin-bottom: 0.5rem;
+      }
+      .contact-card > p {
+        text-align: center;
+        color: #8b7f72;
+        margin-bottom: 2.2rem;
+      }
+
+      .name-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      @media (min-width: 480px) {
+        .name-row {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.3rem;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 1.4rem;
+      }
+      .form-group label {
+        display: block;
+        font-size: 0.9rem;
+        margin-bottom: 0.45rem;
+        color: var(--ink-soft);
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 14px 0;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid #ede4d8;
+        font-size: 1.02rem;
+        font-family: "Outfit", sans-serif;
+        color: var(--oak);
+        transition: border-color 0.2s ease;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-bottom-color: var(--ember);
+      }
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        width: 100%;
+        padding: 18px;
+        background: var(--oak);
+        color: #fff;
+        border: none;
+        border-radius: 9999px;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 1.2px;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: background 0.2s ease;
+      }
+      .submit-btn:hover {
+        background: var(--ember);
+      }
+
+      /* ===================== FOOTER ===================== */
+      .footer {
+        background: var(--oak);
+        color: #ede4d8;
+        padding: 3.6rem 0 2.6rem;
+        z-index: 1;
+      }
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        text-align: center;
+      }
+      @media (min-width: 720px) {
+        .footer-content {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+        }
+      }
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .footer-logo img {
+        width: 58px;
+        height: 58px;
+        object-fit: contain;
+        display: block;
+        /* keep the sage mark legible on dark oak */
+        filter: brightness(0) invert(1) opacity(0.85);
+      }
+      .footer-logo-text {
+        font-family: "Cinzel", Georgia, serif;
+        font-size: 1.4rem;
+        color: #fff;
+      }
+      .footer-links {
+        display: flex;
+        gap: 2rem;
+      }
+      .footer-links a {
+        color: #c7b9a8;
+        text-decoration: none;
+        font-size: 0.92rem;
+        transition: color 0.2s;
+      }
+      .footer-links a:hover {
+        color: #fff;
+      }
+
+      /* ===================== REVEAL ===================== */
+      .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition:
+          opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+          transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+      }
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* ===================== MOBILE NAV ===================== */
+      @media (max-width: 899px) {
         .hero {
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            padding-top: 96px;
-            padding-bottom: 3rem;
+          min-height: 100svh;
+          padding-top: 86px;
+          padding-bottom: 28px;
+          align-items: center;
         }
 
         .hero-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2.5rem;
-            align-items: center;
-            width: 100%;
+          min-height: calc(100svh - 114px);
+          grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+          grid-template-rows: auto auto;
+          column-gap: 1rem;
+          row-gap: 1.15rem;
+          align-items: center;
+          align-content: center;
+          padding-top: 0;
+          transform: translateY(-30px);
         }
 
-        @media (min-width: 900px) {
-            .hero-grid {
-                grid-template-columns: 1fr 1.15fr;
-                gap: 4.5rem;
-            }
+        .hero-mark-mobile {
+          display: block;
+          grid-column: 1 / -1;
+          grid-row: 1;
+          justify-self: center;
+          width: clamp(165px, 42vw, 205px);
+          height: auto;
+          margin: -66px 0 0;
         }
 
-         .hero-mark {
-            display: block;
-            width: clamp(150px, 28vw, 230px);
-            height: auto;
-            margin: 0 auto 1.25rem;
-            opacity: 1;
+        .hero-text {
+          grid-column: 1;
+          grid-row: 2;
+          min-width: 0;
+          align-self: center;
         }
 
-        .hero-mark-mobile { display: none; }
+        .hero-text .hero-mark {
+          display: none;
+        }
 
         .hero-text h1 {
-            font-size: clamp(3rem, 8.5vw, 6rem);
-            color: var(--taupe);
-            margin-bottom: 0.3rem;
+          font-size: clamp(1.45rem, 5.8vw, 1.95rem);
+          line-height: 1.02;
+          margin-bottom: 0.28rem;
         }
 
         .hero-text .present {
-            font-family: 'Cinzel', Georgia, serif;
-            font-weight: 700;
-            font-size: clamp(2.7rem, 7.5vw, 5.4rem);
-            color: var(--oak);
-            line-height: 1.05;
-            margin-bottom: 1.6rem;
+          font-size: clamp(1.38rem, 5.7vw, 1.86rem);
+          line-height: 1;
+          margin-bottom: 0.8rem;
+          white-space: nowrap;
         }
 
         .hero-text p {
-            font-size: 1.1rem;
-            max-width: 440px;
-            color: var(--ink-soft);
-            margin-bottom: 2rem;
+          max-width: 24ch;
+          font-size: 0.8rem;
+          line-height: 1.42;
+          margin-bottom: 0.9rem;
         }
 
         .hero-cta {
-            display: inline-block;
-            padding: 14px 30px;
-            background: var(--oak);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            letter-spacing: 0.6px;
-            transition: background 0.2s ease, transform 0.2s ease;
+          padding: 10px 14px;
+          font-size: 0.78rem;
+          white-space: nowrap;
         }
-        .hero-cta:hover { background: var(--ember); transform: translateY(-2px); }
+
+        .hero-image {
+          grid-column: 2;
+          grid-row: 2;
+          align-self: center;
+        }
 
         .hero-image img {
-            width: 100%;
-            max-height: 720px;
-            object-fit: cover;
-            border-radius: 28px;
-            box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.28);
-            opacity: 1;
-            transition: opacity .45s ease;
+          width: 100%;
+          height: clamp(230px, 56vw, 300px);
+          max-height: none;
+          object-fit: cover;
+          border-radius: 18px;
+          box-shadow: 0 20px 44px -22px rgb(0 0 0 / 0.26);
         }
 
-        .hero-image img.hero-changing {
-            opacity: 0;
+        .about {
+          padding: 3.6rem 0 4.5rem;
         }
-
-        /* ===================== ABOUT ===================== */
-        .about { padding: 6.5rem 0; }
 
         .about-panel {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: rgba(255, 255, 255, 0.62);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 1px solid rgba(255,255,255,0.7);
-            border-radius: 32px;
-            box-shadow: 0 30px 70px -35px rgb(0 0 0 / 0.18);
-            padding: 3.5rem 2rem;
+          padding: 2.15rem 1.35rem;
+          border-radius: 26px;
         }
 
         .about-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 3rem;
-            align-items: center;
+          grid-template-columns: minmax(0, 1fr) 132px;
+          gap: 0.9rem 1rem;
+          align-items: start;
         }
 
-        @media (min-width: 900px) {
-            .about-panel { padding: 4rem 4rem; }
-            .about-grid { grid-template-columns: 1fr 1.05fr; gap: 5rem; }
+        .about-text {
+          display: contents;
         }
 
         .about-text .label {
-            font-size: 0.82rem;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: var(--taupe);
-            margin-bottom: 1rem;
-            display: block;
+          grid-column: 1 / -1;
+          grid-row: 1;
+          margin-bottom: 0.25rem;
         }
 
         .about-text h2 {
-            font-size: clamp(2.4rem, 5.2vw, 3.6rem);
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text p {
-            font-size: 1.05rem;
-            color: var(--ink-soft);
-            margin-bottom: 1.3rem;
-        }
-
-        .about-text .about-signoff {
-            font-size: 1.05rem;
-            font-weight: 600;
-            color: var(--oak);
-            margin-top: .15rem;
+          grid-column: 1;
+          grid-row: 2;
+          font-size: clamp(1.8rem, 7.8vw, 2.45rem);
+          line-height: 1.04;
+          margin-bottom: 0.4rem;
         }
 
         .portrait-frame {
-            position: relative;
-            max-width: 460px;
-            margin: 0 auto;
-            width: 100%;
+          grid-column: 2;
+          grid-row: 2 / span 2;
+          width: 100%;
+          max-width: 132px;
+          align-self: center;
+          margin: 0;
         }
 
-        .portrait-frame img {
-            width: 100%;
-            height: auto;
-            display: block;
+        .about-text p {
+          font-size: 0.94rem;
+          line-height: 1.55;
+          margin-bottom: 0.85rem;
         }
 
-        /* ===================== MEMORY COLLECTION ===================== */
-        .memory { padding: 5.5rem 0; }
-
-        .section-eyebrow {
-            font-size: 0.82rem;
-            letter-spacing: 3.5px;
-            text-transform: uppercase;
-            color: var(--taupe);
-            margin-bottom: 0.8rem;
-            display: block;
+        .about-text p:first-of-type {
+          grid-column: 1;
+          grid-row: 3;
         }
 
-        .memory-header {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            margin-bottom: 1.6rem;
+        .about-text p:nth-of-type(n + 2) {
+          grid-column: 1 / -1;
         }
 
-        .memory-header h2 {
-            font-size: clamp(2.4rem, 5vw, 3.6rem);
-            margin-bottom: 0.45rem;
+        .about-text p:last-of-type {
+          margin-bottom: 0;
+        }
+      }
+
+      @media (max-width: 899px) {
+        .memory {
+          padding-left: 0.7rem;
+          padding-right: 0.7rem;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .hero {
+          min-height: 100svh;
+          padding-top: 82px;
+          padding-bottom: 22px;
         }
 
-        .memory-intro {
-            max-width: 590px;
-            color: var(--ink-soft);
-            font-size: 1.02rem;
+        .hero-grid {
+          min-height: calc(100svh - 104px);
+          grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+          column-gap: 0.78rem;
+          row-gap: 1rem;
+          align-content: center;
+          transform: translateY(-30px);
         }
 
-        .collection-shell {
-            background: transparent;
-            border: 0;
-            box-shadow: none;
-            padding: clamp(1rem, 2vw, 1.5rem);
-            overflow: hidden;
+        .hero-mark-mobile {
+          width: 164px;
+          margin-top: -84px;
         }
 
-        .collection-toolbar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.65rem;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1rem;
+        .hero-text h1 {
+          font-size: clamp(1.3rem, 5.5vw, 1.55rem);
+          line-height: 1.02;
         }
 
-        .collection-tabs {
-            display: flex;
-            gap: 0.45rem;
-            flex-wrap: wrap;
+        .hero-text .present {
+          font-size: clamp(1.28rem, 5.35vw, 1.56rem);
         }
 
-        .collection-tab,
-        .gallery-control,
-        .open-gallery,
-        .modal-close {
-            font: inherit;
-            border: 0;
-            cursor: pointer;
+        .hero-text p {
+          font-size: 0.74rem;
+          line-height: 1.4;
         }
 
-        .collection-tab {
-            padding: 9px 14px;
-            border-radius: 999px;
-            background: rgba(248,241,227,0.82);
-            color: var(--ink-soft);
-            border: 1px solid rgba(168,137,108,0.18);
-            transition: background .2s ease, color .2s ease, transform .2s ease;
-        }
-        .collection-tab:hover { transform: translateY(-1px); }
-        .collection-tab.active { background: var(--oak); color: #fff; }
-
-        .gallery-controls { display: flex; gap: 0.45rem; }
-        .gallery-control {
-            min-width: 42px;
-            height: 42px;
-            padding: 0 13px;
-            border-radius: 999px;
-            background: #fff;
-            color: var(--oak);
-            border: 1px solid rgba(44,37,34,0.10);
-            box-shadow: 0 8px 22px -14px rgb(0 0 0 / .28);
-            transition: transform .2s ease, background .2s ease;
-        }
-        .gallery-control:hover { transform: translateY(-2px); background: var(--cream); }
-
-        .featured-gallery {
-            display: grid;
-            grid-template-columns: minmax(0, 1.45fr) minmax(220px, .72fr);
-            gap: 0.9rem;
-            min-height: 560px;
+        .hero-cta {
+          padding: 9px 12px;
+          font-size: 0.74rem;
         }
 
-        .gallery-side {
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            gap: 0.9rem;
-            min-height: 0;
+        .hero-image img {
+          height: clamp(225px, 58vw, 270px);
+          border-radius: 16px;
         }
 
-        .gallery-card {
-            position: relative;
-            width: 100%;
-            min-height: 0;
-            overflow: hidden;
-            border: 0;
-            padding: 0;
-            border-radius: 22px;
-            background: #d8cbbb;
-            cursor: pointer;
-            box-shadow: 0 18px 40px -24px rgb(0 0 0 / .32);
-            isolation: isolate;
+        .about-panel {
+          padding: 1.9rem 1.15rem;
         }
 
-        .gallery-card img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transform: scale(1.001);
-            transition: opacity .45s ease, transform 1.1s cubic-bezier(.23,1,.32,1);
-        }
-        .gallery-card:hover img { transform: scale(1.025); }
-        .gallery-card.is-changing img { opacity: .24; }
-
-        .gallery-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 52%, rgba(25,20,17,.68) 100%);
-            z-index: 1;
-            pointer-events: none;
+        .about-grid {
+          grid-template-columns: minmax(0, 1fr) 112px;
+          gap: 0.75rem 0.85rem;
         }
 
-        .gallery-card-main { min-height: 560px; }
-        .gallery-card-small { min-height: 0; }
-
-        .gallery-caption {
-            position: absolute;
-            z-index: 2;
-            left: 1.15rem;
-            right: 1.15rem;
-            bottom: 1rem;
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            gap: 1rem;
-            text-align: left;
-            text-shadow: 0 2px 18px rgba(0,0,0,.28);
-        }
-        .gallery-caption strong { font-size: 1rem; font-weight: 500; }
-        .gallery-caption span { font-size: .78rem; opacity: .78; letter-spacing: .08em; text-transform: uppercase; }
-
-        .collection-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 1rem .2rem .1rem;
-            color: var(--ink-soft);
-            font-size: .92rem;
+        .portrait-frame {
+          max-width: 112px;
         }
 
-        .open-gallery {
-            padding: 11px 18px;
-            border-radius: 999px;
-            background: transparent;
-            color: var(--oak);
-            border: 1px solid rgba(44,37,34,.18);
-            transition: background .2s ease, color .2s ease;
-        }
-        .open-gallery:hover { background: var(--oak); color: #fff; }
-
-        /* full portfolio stays off the front page until requested */
-        .gallery-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 500;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            background: rgba(24,19,16,.78);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-        .gallery-modal.open { display: flex; }
-        .gallery-modal-panel {
-            width: min(1160px, 100%);
-            max-height: min(90dvh, 900px);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            background: var(--cream);
-            border: 1px solid rgba(255,255,255,.45);
-            border-radius: 28px;
-            box-shadow: 0 35px 90px rgba(0,0,0,.30);
-        }
-        .gallery-modal-top {
-            flex: 0 0 auto;
-            z-index: 4;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: 1.1rem 1.25rem;
-            background: rgba(248,241,227,.94);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(44,37,34,.08);
-        }
-        .gallery-modal-scroll {
-            flex: 1 1 auto;
-            min-height: 0;
-            overflow-y: auto;
-            overscroll-behavior: contain;
-            scrollbar-gutter: stable;
-            scrollbar-width: thin;
-            scrollbar-color: rgba(168,137,108,.72) transparent;
-            margin: .35rem .35rem .45rem 0;
-            border-radius: 0 0 22px 22px;
-        }
-        .gallery-modal-scroll::-webkit-scrollbar { width: 11px; }
-        .gallery-modal-scroll::-webkit-scrollbar-track { background: transparent; }
-        .gallery-modal-scroll::-webkit-scrollbar-thumb {
-            background: rgba(168,137,108,.62);
-            border: 3px solid transparent;
-            background-clip: padding-box;
-            border-radius: 999px;
-        }
-        .gallery-modal-scroll::-webkit-scrollbar-thumb:hover { background: rgba(92,81,72,.72); background-clip: padding-box; }
-        .gallery-modal-top h3 { font-size: clamp(1.35rem, 3vw, 1.85rem); }
-        .modal-close {
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            background: var(--oak);
-            color: #fff;
-            font-size: 1.25rem;
-        }
-        .full-gallery-grid {
-            columns: 2 230px;
-            column-gap: .8rem;
-            padding: .9rem;
-        }
-        .full-gallery-item {
-            width: 100%;
-            display: block;
-            break-inside: avoid;
-            margin: 0 0 .8rem;
-            border: 0;
-            padding: 0;
-            border-radius: 16px;
-            overflow: hidden;
-            background: #ddd0c0;
-            cursor: pointer;
-        }
-        .full-gallery-item img { width: 100%; height: auto; display: block; transition: transform .5s ease; }
-        .full-gallery-item:hover img { transform: scale(1.025); }
-        body.gallery-open { overflow: hidden; }
-
-        @media (max-width: 760px) {
-            .collection-toolbar { align-items: flex-start; }
-            .gallery-controls { width: 100%; justify-content: flex-end; }
-            .featured-gallery { grid-template-columns: 1fr; min-height: 0; }
-            .gallery-card-main { min-height: 470px; }
-            .gallery-side { grid-template-columns: 1fr 1fr; grid-template-rows: none; min-height: 210px; }
-            .gallery-card-small { min-height: 210px; }
-            .gallery-caption { left: .9rem; right: .9rem; bottom: .8rem; }
-            .gallery-card-small .gallery-caption strong { font-size: .88rem; }
-            .gallery-card-small .gallery-caption span { display: none; }
-            .collection-footer { align-items: flex-start; flex-direction: column; }
-            .open-gallery { width: 100%; }
+        .about-text h2 {
+          font-size: clamp(1.65rem, 7.5vw, 2.05rem);
         }
 
-        @media (max-width: 480px) {
-            .gallery-card-main { min-height: 410px; }
-            .gallery-side { min-height: 170px; }
-            .gallery-card-small { min-height: 170px; }
-            .full-gallery-grid { columns: 2 145px; padding: .65rem; column-gap: .65rem; }
-            .full-gallery-item { margin-bottom: .65rem; border-radius: 12px; }
+        .about-text p {
+          font-size: 0.88rem;
         }
+      }
 
-        /* ===================== PRICING ===================== */
-        .pricing { padding: 5.5rem 0; }
-
-        .pricing-panel {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: transparent;
-            border: 0;
-            box-shadow: none;
-            padding: 3.5rem 1.5rem;
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: rgba(248, 241, 227, 0.98);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          flex-direction: column;
+          gap: 0;
+          padding: 0.5rem 1.5rem 1.5rem;
+          border-bottom: 1px solid rgba(44, 37, 34, 0.1);
         }
-        @media (min-width: 900px) { .pricing-panel { padding: 4.5rem 3.5rem; } }
-
-        .pricing-header { text-align: center; max-width: 640px; margin: 0 auto 3rem; }
-        .pricing-header h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); margin-bottom: 0.6rem; }
-        .pricing-header p { color: var(--ink-soft); margin-top: 0.8rem; }
-
-        .category { margin-bottom: 3rem; }
-        .category:last-child { margin-bottom: 0; }
-
-        .category-header {
-            font-family: 'Cinzel', Georgia, serif;
-            font-size: 1.3rem;
-            color: var(--ember);
-            margin-bottom: 1.1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid rgba(168,137,108,0.3);
+        .nav-links.active {
+          display: flex;
         }
-
-        .vibe-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.4rem;
+        .nav-links li {
+          border-top: 1px solid rgba(44, 37, 34, 0.06);
         }
-        @media (min-width: 680px) { .vibe-grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 1100px) { .vibe-grid { grid-template-columns: repeat(3, 1fr); } }
-
-        .vibe-card {
-            background: #fff;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.1);
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s ease;
-            border: 1px solid #EDE4D8;
-            display: flex;
-            flex-direction: column;
+        .nav-links a {
+          display: block;
+          padding: 0.95rem 0;
         }
-        .vibe-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 22px 45px -12px rgb(0 0 0 / 0.15);
+        .hamburger {
+          display: flex;
         }
-        .vibe-card.selected {
-            border-color: var(--ember);
-            box-shadow: 0 0 0 4px rgba(193, 127, 89, 0.12);
-        }
-
-        .vibe-card-header { padding: 1.5rem 1.8rem 1rem; }
-        .vibe-card-header h3 { font-size: 1.45rem; color: var(--oak); margin-bottom: 0.3rem; }
-
-        .price { font-size: 2rem; font-weight: 700; color: var(--ember); }
-        .price span { font-size: 0.95rem; font-weight: 400; color: #8B7F72; }
-
-        .vibe-details { padding: 0 1.8rem 1.5rem; flex: 1; }
-        .vibe-details ul { list-style: none; font-size: 0.95rem; color: var(--ink-soft); }
-        .vibe-details li { padding: 5px 0; display: flex; gap: 9px; }
-        .vibe-details li::before { content: "•"; color: var(--taupe); font-size: 1.3rem; line-height: 1; }
-
-        .choose-btn {
-            margin: 0 1.8rem 1.8rem;
-            width: calc(100% - 3.6rem);
-            padding: 14px 24px;
-            background: var(--oak);
-            color: #fff;
-            border: none;
-            border-radius: 9999px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.6px;
-            cursor: pointer;
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-        .choose-btn:hover { background: var(--ember); transform: translateY(-2px); }
-
-        /* ===================== CONTACT ===================== */
-        .contact { padding: 5.5rem 0 6.5rem; }
-
-        .contact-card {
-            max-width: 640px;
-            margin: 0 auto;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border-radius: 26px;
-            padding: 3rem 1.6rem;
-            box-shadow: 0 25px 60px -20px rgb(0 0 0 / 0.14);
-        }
-        @media (min-width: 600px) { .contact-card { padding: 3.2rem 2.6rem; } }
-
-        .contact-card h2 { font-size: clamp(2rem, 5vw, 2.45rem); text-align: center; margin-bottom: 0.5rem; }
-        .contact-card > p { text-align: center; color: #8B7F72; margin-bottom: 2.2rem; }
-
-        .name-row {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0;
-        }
-        @media (min-width: 480px) { .name-row { grid-template-columns: 1fr 1fr; gap: 1.3rem; } }
-
-        .form-group { margin-bottom: 1.4rem; }
-        .form-group label { display: block; font-size: 0.9rem; margin-bottom: 0.45rem; color: var(--ink-soft); }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 14px 0;
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid #EDE4D8;
-            font-size: 1.02rem;
-            font-family: 'Outfit', sans-serif;
-            color: var(--oak);
-            transition: border-color 0.2s ease;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus { outline: none; border-bottom-color: var(--ember); }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-
-        .submit-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--oak);
-            color: #fff;
-            border: none;
-            border-radius: 9999px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 1.2px;
-            margin-top: 1rem;
-            cursor: pointer;
-            transition: background 0.2s ease;
-        }
-        .submit-btn:hover { background: var(--ember); }
-
-        /* ===================== FOOTER ===================== */
-        .footer {
-            background: var(--oak);
-            color: #EDE4D8;
-            padding: 3.6rem 0 2.6rem;
-            z-index: 1;
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-            text-align: center;
-        }
-        @media (min-width: 720px) {
-            .footer-content { flex-direction: row; justify-content: space-between; text-align: left; }
-        }
-        .footer-logo { display: flex; align-items: center; gap: 14px; }
-        .footer-logo img {
-            width: 58px;
-            height: 58px;
-            object-fit: contain;
-            display: block;
-            /* keep the sage mark legible on dark oak */
-            filter: brightness(0) invert(1) opacity(0.85);
-        }
-        .footer-logo-text { font-family: 'Cinzel', Georgia, serif; font-size: 1.4rem; color: #fff; }
-        .footer-links { display: flex; gap: 2rem; }
-        .footer-links a { color: #C7B9A8; text-decoration: none; font-size: 0.92rem; transition: color 0.2s; }
-        .footer-links a:hover { color: #fff; }
-
-        /* ===================== REVEAL ===================== */
-        .reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s cubic-bezier(0.23,1,0.32,1), transform 0.8s cubic-bezier(0.23,1,0.32,1);
-        }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
-
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1; transform: none; transition: none; }
-            html { scroll-behavior: auto; }
-        }
-
-        /* ===================== MOBILE NAV ===================== */
-        @media (max-width: 899px) {
-            .hero {
-                min-height: 100svh;
-                padding-top: 86px;
-                padding-bottom: 28px;
-                align-items: center;
-            }
-
-            .hero-grid {
-                min-height: calc(100svh - 114px);
-                grid-template-columns: minmax(0, .92fr) minmax(0, 1.08fr);
-                grid-template-rows: auto auto;
-                column-gap: 1rem;
-                row-gap: 1.15rem;
-                align-items: center;
-                align-content: center;
-                padding-top: 0;
-                transform: translateY(-30px);
-            }
-
-            .hero-mark-mobile {
-                display: block;
-                grid-column: 1 / -1;
-                grid-row: 1;
-                justify-self: center;
-                width: clamp(165px, 42vw, 205px);
-                height: auto;
-                margin: -66px 0 0;
-            }
-
-            .hero-text {
-                grid-column: 1;
-                grid-row: 2;
-                min-width: 0;
-                align-self: center;
-            }
-
-            .hero-text .hero-mark {
-                display: none;
-            }
-
-            .hero-text h1 {
-                font-size: clamp(1.45rem, 5.8vw, 1.95rem);
-                line-height: 1.02;
-                margin-bottom: .28rem;
-            }
-
-            .hero-text .present {
-                font-size: clamp(1.38rem, 5.7vw, 1.86rem);
-                line-height: 1;
-                margin-bottom: .8rem;
-                white-space: nowrap;
-            }
-
-            .hero-text p {
-                max-width: 24ch;
-                font-size: .8rem;
-                line-height: 1.42;
-                margin-bottom: .9rem;
-            }
-
-            .hero-cta {
-                padding: 10px 14px;
-                font-size: .78rem;
-                white-space: nowrap;
-            }
-
-            .hero-image {
-                grid-column: 2;
-                grid-row: 2;
-                align-self: center;
-            }
-
-            .hero-image img {
-                width: 100%;
-                height: clamp(230px, 56vw, 300px);
-                max-height: none;
-                object-fit: cover;
-                border-radius: 18px;
-                box-shadow: 0 20px 44px -22px rgb(0 0 0 / 0.26);
-            }
-
-            .about {
-                padding: 3.6rem 0 4.5rem;
-            }
-
-            .about-panel {
-                padding: 2.15rem 1.35rem;
-                border-radius: 26px;
-            }
-
-            .about-grid {
-                grid-template-columns: minmax(0, 1fr) 132px;
-                gap: .9rem 1rem;
-                align-items: start;
-            }
-
-            .about-text {
-                display: contents;
-            }
-
-            .about-text .label {
-                grid-column: 1 / -1;
-                grid-row: 1;
-                margin-bottom: .25rem;
-            }
-
-            .about-text h2 {
-                grid-column: 1;
-                grid-row: 2;
-                font-size: clamp(1.8rem, 7.8vw, 2.45rem);
-                line-height: 1.04;
-                margin-bottom: .4rem;
-            }
-
-            .portrait-frame {
-                grid-column: 2;
-                grid-row: 2 / span 2;
-                width: 100%;
-                max-width: 132px;
-                align-self: center;
-                margin: 0;
-            }
-
-            .about-text p {
-                font-size: .94rem;
-                line-height: 1.55;
-                margin-bottom: .85rem;
-            }
-
-            .about-text p:first-of-type {
-                grid-column: 1;
-                grid-row: 3;
-            }
-
-            .about-text p:nth-of-type(n+2) {
-                grid-column: 1 / -1;
-            }
-
-            .about-text p:last-of-type {
-                margin-bottom: 0;
-            }
-        }
-
-        @media (max-width: 899px) {
-            .memory {
-                padding-left: .7rem;
-                padding-right: .7rem;
-            }
-        }
-
-        @media (max-width: 520px) {
-            .hero {
-                min-height: 100svh;
-                padding-top: 82px;
-                padding-bottom: 22px;
-            }
-
-            .hero-grid {
-                min-height: calc(100svh - 104px);
-                grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
-                column-gap: .78rem;
-                row-gap: 1rem;
-                align-content: center;
-                transform: translateY(-30px);
-            }
-
-            .hero-mark-mobile {
-                width: 164px;
-                margin-top: -84px;
-            }
-
-            .hero-text h1 {
-                font-size: clamp(1.3rem, 5.5vw, 1.55rem);
-                line-height: 1.02;
-            }
-
-            .hero-text .present {
-                font-size: clamp(1.28rem, 5.35vw, 1.56rem);
-            }
-
-            .hero-text p {
-                font-size: .74rem;
-                line-height: 1.4;
-            }
-
-            .hero-cta {
-                padding: 9px 12px;
-                font-size: .74rem;
-            }
-
-            .hero-image img {
-                height: clamp(225px, 58vw, 270px);
-                border-radius: 16px;
-            }
-
-            .about-panel {
-                padding: 1.9rem 1.15rem;
-            }
-
-            .about-grid {
-                grid-template-columns: minmax(0, 1fr) 112px;
-                gap: .75rem .85rem;
-            }
-
-            .portrait-frame {
-                max-width: 112px;
-            }
-
-            .about-text h2 {
-                font-size: clamp(1.65rem, 7.5vw, 2.05rem);
-            }
-
-            .about-text p {
-                font-size: .88rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0; right: 0;
-                background: rgba(248, 241, 227, 0.98);
-                backdrop-filter: blur(14px);
-                -webkit-backdrop-filter: blur(14px);
-                flex-direction: column;
-                gap: 0;
-                padding: 0.5rem 1.5rem 1.5rem;
-                border-bottom: 1px solid rgba(44, 37, 34, 0.1);
-            }
-            .nav-links.active { display: flex; }
-            .nav-links li { border-top: 1px solid rgba(44,37,34,0.06); }
-            .nav-links a { display: block; padding: 0.95rem 0; }
-            .hamburger { display: flex; }
-        }
+      }
     </style>
-</head>
-<body>
-
+  </head>
+  <body>
     <!-- site-wide ambient particles -->
     <canvas id="bg-canvas"></canvas>
 
     <!-- NAV -->
     <nav class="nav">
-        <div class="nav-content">
-            <a href="#" class="logo">
-                <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography logo">
-                <span class="logo-text">Elizabeth Aven</span>
-            </a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#memory">Portfolio</a></li>
-                <li><a href="#pricing">Packages</a></li>
-                <li><a href="#contact">Inquire</a></li>
-            </ul>
-            <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
+      <div class="nav-content">
+        <a href="#" class="logo">
+          <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography logo" />
+          <span class="logo-text">Elizabeth Aven</span>
+        </a>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#memory">Portfolio</a></li>
+          <li><a href="#pricing">Packages</a></li>
+          <li><a href="#contact">Inquire</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
 
     <main>
-        <!-- HERO -->
-        <section class="hero section">
-            <div class="hero-grid">
-                <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography" class="hero-mark-mobile">
-                <div class="hero-text reveal">
-                    <img src="assets/images/branding/logo.png" alt="Elizabeth Aven Photography" class="hero-mark">
-                    <h1>Natural Photography</h1>
-                    <div class="present">For Real Life.</div>
-                    <p>Couples, families, milestones, and all the moments in between.</p>
-                    <a href="#contact" class="hero-cta">Book your session</a>
-                </div>
-                <div class="hero-image reveal">
-                    <img id="hero-photo" src="assets/images/portfolio/couples/couple1.jpg" alt="Couple embracing at golden hour">
-                </div>
+      <!-- HERO -->
+      <section class="hero section">
+        <div class="hero-grid">
+          <img
+            src="assets/images/branding/logo.png"
+            alt="Elizabeth Aven Photography"
+            class="hero-mark-mobile"
+          />
+          <div class="hero-text reveal">
+            <img
+              src="assets/images/branding/logo.png"
+              alt="Elizabeth Aven Photography"
+              class="hero-mark"
+            />
+            <h1>Natural Photography</h1>
+            <div class="present">For Real Life.</div>
+            <p>Couples, families, milestones, and all the moments in between.</p>
+            <a href="#contact" class="hero-cta">Book your session</a>
+          </div>
+          <div class="hero-image reveal">
+            <img
+              id="hero-photo"
+              src="assets/images/portfolio/couples/couple1.jpg"
+              alt="Couple embracing at golden hour"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" class="about section">
+        <div class="about-panel reveal">
+          <div class="about-grid">
+            <div class="about-text">
+              <span class="label">The Artist Behind The Lens</span>
+              <h2>Hi, I’m Elizabeth Schuelke.</h2>
+              <p
+                >I’m a photographer, teacher, mom, and Navasota girl who has loved taking pictures
+                since my junior year of high school. What started as a hobby quickly became
+                something I couldn’t imagine not doing.</p
+              >
+              <p
+                >I’ve always loved photographs, but what I love even more is what they give us years
+                later. A picture that takes you right back to a person, a season, a feeling, or a
+                moment you didn’t realize would mean so much.</p
+              >
+              <p
+                >I love the in-between moments. The laughs you didn’t plan, the way your kids look
+                at you, the little details you’ll forget with time, and the people who make your
+                life what it is.</p
+              >
+              <p
+                >My goal is simple: to give you
+                <strong
+                  >beautiful photographs, genuine moments, and memories you can hold onto
+                  forever</strong
+                >. I’ll probably tell you to forget I’m even there, let your kids be kids, laugh at
+                each other, and just enjoy being together. The best photos usually happen that way
+                anyway.</p
+              >
+              <p class="about-signoff">This is what I love to do, and I’m so glad you’re here.</p>
             </div>
-        </section>
-
-        <!-- ABOUT -->
-        <section id="about" class="about section">
-            <div class="about-panel reveal">
-                <div class="about-grid">
-                    <div class="about-text">
-                        <span class="label">The Artist Behind The Lens</span>
-                        <h2>Hi, I’m Elizabeth Schuelke.</h2>
-                        <p>I’m a photographer, teacher, mom, and Navasota girl who has loved taking pictures since my junior year of high school. What started as a hobby quickly became something I couldn’t imagine not doing.</p>
-                        <p>I’ve always loved photographs, but what I love even more is what they give us years later. A picture that takes you right back to a person, a season, a feeling, or a moment you didn’t realize would mean so much.</p>
-                        <p>I love the in-between moments. The laughs you didn’t plan, the way your kids look at you, the little details you’ll forget with time, and the people who make your life what it is.</p>
-                        <p>My goal is simple: to give you <strong>beautiful photographs, genuine moments, and memories you can hold onto forever</strong>. I’ll probably tell you to forget I’m even there, let your kids be kids, laugh at each other, and just enjoy being together. The best photos usually happen that way anyway.</p>
-                        <p class="about-signoff">This is what I love to do, and I’m so glad you’re here.</p>
-                    </div>
-                    <div class="portrait-frame">
-                        <img src="assets/images/branding/lizzie.png" alt="Elizabeth Aven smiling with her camera">
-                    </div>
-                </div>
+            <div class="portrait-frame">
+              <img
+                src="assets/images/branding/lizzie.png"
+                alt="Elizabeth Aven smiling with her camera"
+              />
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <!-- MEMORY COLLECTION -->
-        <section id="memory" class="memory section">
-            <div class="memory-header reveal">
-                <div>
-                    <span class="section-eyebrow">A Living Portfolio</span>
-                    <h2>The Memory Collection</h2>
-                    <p class="memory-intro">A rotating mix of families, couples, seniors and professional portraits. Pick a collection or let it keep shuffling.</p>
-                </div>
-            </div>
-
-            <div class="collection-shell reveal" id="collection-shell">
-                <div class="collection-toolbar">
-                    <div class="collection-tabs" id="collection-tabs" aria-label="Filter portfolio">
-                        <button class="collection-tab active" type="button" data-category="all">All</button>
-                    </div>
-                    <div class="gallery-controls" aria-label="Portfolio controls">
-                        <button class="gallery-control" id="gallery-prev" type="button" aria-label="Previous photos">←</button>
-                        <button class="gallery-control" id="gallery-shuffle" type="button" aria-label="Shuffle photos">Shuffle</button>
-                        <button class="gallery-control" id="gallery-next" type="button" aria-label="Next photos">→</button>
-                    </div>
-                </div>
-
-                <div class="featured-gallery" aria-live="polite">
-                    <button class="gallery-card gallery-card-main" type="button" data-gallery-slot="0" aria-label="Open featured photo in full portfolio">
-                        <img src="assets/images/portfolio/couples/couple3.jpg" alt="Couple sharing a candid moment indoors">
-                        <span class="gallery-caption"><strong>Couples</strong><span>Featured</span></span>
-                    </button>
-                    <div class="gallery-side">
-                        <button class="gallery-card gallery-card-small" type="button" data-gallery-slot="1" aria-label="Open photo in full portfolio">
-                            <img src="assets/images/portfolio/families/family6.jpg" alt="Family portrait outdoors">
-                            <span class="gallery-caption"><strong>Families</strong><span>Collection</span></span>
-                        </button>
-                        <button class="gallery-card gallery-card-small" type="button" data-gallery-slot="2" aria-label="Open photo in full portfolio">
-                            <img src="assets/images/portfolio/headshots/headshot5.jpg" alt="Professional portrait">
-                            <span class="gallery-caption"><strong>Headshots</strong><span>Collection</span></span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="collection-footer">
-                    <span id="collection-status">Showing a random selection from the full portfolio.</span>
-                    <button class="open-gallery" id="open-gallery" type="button">View full collection</button>
-                </div>
-            </div>
-        </section>
-
-        <div class="gallery-modal" id="gallery-modal" role="dialog" aria-modal="true" aria-labelledby="gallery-modal-title" aria-hidden="true">
-            <div class="gallery-modal-panel">
-                <div class="gallery-modal-top">
-                    <div>
-                        <span class="section-eyebrow" style="margin-bottom:.3rem;">Portfolio</span>
-                        <h3 id="gallery-modal-title">The Full Collection</h3>
-                    </div>
-                    <button class="modal-close" id="gallery-modal-close" type="button" aria-label="Close portfolio">×</button>
-                </div>
-                <div class="gallery-modal-scroll">
-                    <div class="full-gallery-grid" id="full-gallery-grid"></div>
-                </div>
-            </div>
+      <!-- MEMORY COLLECTION -->
+      <section id="memory" class="memory section">
+        <div class="memory-header reveal">
+          <div>
+            <span class="section-eyebrow">A Living Portfolio</span>
+            <h2>The Memory Collection</h2>
+            <p class="memory-intro"
+              >A rotating mix of families, couples, seniors and professional portraits. Pick a
+              collection or let it keep shuffling.</p
+            >
+          </div>
         </div>
 
-        <!-- PRICING -->
-        <section id="pricing" class="pricing section">
-            <div class="pricing-panel">
-                <div class="pricing-header">
-                    <h2>Packages &amp; Investment</h2>
-                    <p>Every session includes a beautiful online gallery and print release.</p>
-                </div>
-
-                <!-- Couples -->
-                <div class="category">
-                    <div class="category-header">Couples &amp; Engagements</div>
-                    <div class="vibe-grid">
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package 1</h3>
-                                <div class="price">$250</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>30-minute session</li>
-                                    <li>1 location • 1 look</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package 1 (Couples) — $250')">Choose this package</button>
-                        </div>
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package 2</h3>
-                                <div class="price">$350</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>50–60 minute session</li>
-                                    <li>2–3 locations • 3 looks</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package 2 (Couples) — $350')">Choose this package</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Family -->
-                <div class="category">
-                    <div class="category-header">Family Sessions</div>
-                    <div class="vibe-grid">
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package A</h3>
-                                <div class="price">$250</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>30-minute session</li>
-                                    <li>1 location • 1 look</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package A (Family) — $250')">Choose this package</button>
-                        </div>
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package B</h3>
-                                <div class="price">$350</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>40–50 minute session</li>
-                                    <li>2 locations • 2 looks</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package B (Family) — $350')">Choose this package</button>
-                        </div>
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package C</h3>
-                                <div class="price">$430</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>60-minute session</li>
-                                    <li>Extended family (7+)</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package C (Family) — $430')">Choose this package</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Seniors -->
-                <div class="category">
-                    <div class="category-header">Seniors</div>
-                    <div class="vibe-grid">
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package 1</h3>
-                                <div class="price">$250</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>30-minute session</li>
-                                    <li>1 location • 1 look</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package 1 — $250')">Choose this package</button>
-                        </div>
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Package 2</h3>
-                                <div class="price">$350</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>50–60 minute session</li>
-                                    <li>2–3 locations • 3 looks</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Package 2 (Seniors) — $350')">Choose this package</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Headshots -->
-                <div class="category">
-                    <div class="category-header">Headshots</div>
-                    <div class="vibe-grid">
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Basic</h3>
-                                <div class="price">$100</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>10–15 minute session</li>
-                                    <li>5–10 photos</li>
-                                    <li>1 location • 1 look</li>
-                                    <li>Online gallery + print release</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Headshots — Basic — $100')">Choose this package</button>
-                        </div>
-                        <div class="vibe-card">
-                            <div class="vibe-card-header">
-                                <h3>Entrepreneur</h3>
-                                <div class="price">$350</div>
-                            </div>
-                            <div class="vibe-details">
-                                <ul>
-                                    <li>Individual or group — up to 5 people</li>
-                                    <li>40-minute session</li>
-                                    <li>1 location • 2 looks</li>
-                                    <li>Online gallery + print release</li>
-                                    <li>Additional $20 per extra person</li>
-                                </ul>
-                            </div>
-                            <button class="choose-btn" onclick="selectPackage(this, 'Headshots — Entrepreneur — $350')">Choose this package</button>
-                        </div>
-                    </div>
-                </div>
+        <div class="collection-shell reveal" id="collection-shell">
+          <div class="collection-toolbar">
+            <div class="collection-tabs" id="collection-tabs" aria-label="Filter portfolio">
+              <button class="collection-tab active" type="button" data-category="all">All</button>
             </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section id="contact" class="contact section">
-            <div class="contact-card reveal">
-                <h2>Let’s Create Together</h2>
-                <p>Tell me about the moments you want to remember. I’ll reply within 48 hours.</p>
-
-                <form action="https://formsubmit.co/elizabethaven.photography@hotmail.com" method="POST">
-                    <input type="hidden" name="_subject" value="New Inquiry • Elizabeth Aven Photography">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-
-                    <div class="name-row">
-                        <div class="form-group">
-                            <label for="first-name">First Name</label>
-                            <input id="first-name" type="text" name="First Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name</label>
-                            <input id="last-name" type="text" name="Last Name" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input id="email" type="email" name="Email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="session-type">Session Type / Package</label>
-                        <input id="session-type" type="text" name="Session Type" placeholder="e.g. Package 1 (Couples)" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="message">Tell me about your vision</label>
-                        <textarea id="message" name="Message" placeholder="What are you celebrating? Any locations or feelings you love?" required></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Send My Inquiry</button>
-                </form>
+            <div class="gallery-controls" aria-label="Portfolio controls">
+              <button
+                class="gallery-control"
+                id="gallery-prev"
+                type="button"
+                aria-label="Previous photos"
+                >←</button
+              >
+              <button
+                class="gallery-control"
+                id="gallery-shuffle"
+                type="button"
+                aria-label="Shuffle photos"
+                >Shuffle</button
+              >
+              <button
+                class="gallery-control"
+                id="gallery-next"
+                type="button"
+                aria-label="Next photos"
+                >→</button
+              >
             </div>
-        </section>
+          </div>
+
+          <div class="featured-gallery" aria-live="polite">
+            <button
+              class="gallery-card gallery-card-main"
+              type="button"
+              data-gallery-slot="0"
+              aria-label="Open featured photo in full portfolio"
+            >
+              <img
+                src="assets/images/portfolio/couples/couple3.jpg"
+                alt="Couple sharing a candid moment indoors"
+              />
+              <span class="gallery-caption"><strong>Couples</strong><span>Featured</span></span>
+            </button>
+            <div class="gallery-side">
+              <button
+                class="gallery-card gallery-card-small"
+                type="button"
+                data-gallery-slot="1"
+                aria-label="Open photo in full portfolio"
+              >
+                <img
+                  src="assets/images/portfolio/families/family6.jpg"
+                  alt="Family portrait outdoors"
+                />
+                <span class="gallery-caption"
+                  ><strong>Families</strong><span>Collection</span></span
+                >
+              </button>
+              <button
+                class="gallery-card gallery-card-small"
+                type="button"
+                data-gallery-slot="2"
+                aria-label="Open photo in full portfolio"
+              >
+                <img
+                  src="assets/images/portfolio/headshots/headshot5.jpg"
+                  alt="Professional portrait"
+                />
+                <span class="gallery-caption"
+                  ><strong>Headshots</strong><span>Collection</span></span
+                >
+              </button>
+            </div>
+          </div>
+
+          <div class="collection-footer">
+            <span id="collection-status">Showing a random selection from the full portfolio.</span>
+            <button class="open-gallery" id="open-gallery" type="button"
+              >View full collection</button
+            >
+          </div>
+        </div>
+      </section>
+
+      <div
+        class="gallery-modal"
+        id="gallery-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="gallery-modal-title"
+        aria-hidden="true"
+      >
+        <div class="gallery-modal-panel">
+          <div class="gallery-modal-top">
+            <div>
+              <span class="section-eyebrow" style="margin-bottom:.3rem;">Portfolio</span>
+              <h3 id="gallery-modal-title">The Full Collection</h3>
+            </div>
+            <button
+              class="modal-close"
+              id="gallery-modal-close"
+              type="button"
+              aria-label="Close portfolio"
+              >×</button
+            >
+          </div>
+          <div class="gallery-modal-scroll">
+            <div class="full-gallery-grid" id="full-gallery-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRICING -->
+      <section id="pricing" class="pricing section">
+        <div class="pricing-panel">
+          <div class="pricing-header">
+            <h2>Packages &amp; Investment</h2>
+            <p>Every session includes a beautiful online gallery and print release.</p>
+          </div>
+
+          <!-- Couples -->
+          <div class="category">
+            <div class="category-header">Couples &amp; Engagements</div>
+            <div class="vibe-grid">
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package 1</h3>
+                  <div class="price">$250</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>30-minute session</li>
+                    <li>1 location • 1 look</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package 1 (Couples) — $250')"
+                  >Choose this package</button
+                >
+              </div>
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package 2</h3>
+                  <div class="price">$350</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>50–60 minute session</li>
+                    <li>2–3 locations • 3 looks</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package 2 (Couples) — $350')"
+                  >Choose this package</button
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Family -->
+          <div class="category">
+            <div class="category-header">Family Sessions</div>
+            <div class="vibe-grid">
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package A</h3>
+                  <div class="price">$250</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>30-minute session</li>
+                    <li>1 location • 1 look</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package A (Family) — $250')"
+                  >Choose this package</button
+                >
+              </div>
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package B</h3>
+                  <div class="price">$350</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>40–50 minute session</li>
+                    <li>2 locations • 2 looks</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package B (Family) — $350')"
+                  >Choose this package</button
+                >
+              </div>
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package C</h3>
+                  <div class="price">$430</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>60-minute session</li>
+                    <li>Extended family (7+)</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package C (Family) — $430')"
+                  >Choose this package</button
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Seniors -->
+          <div class="category">
+            <div class="category-header">Seniors</div>
+            <div class="vibe-grid">
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package 1</h3>
+                  <div class="price">$250</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>30-minute session</li>
+                    <li>1 location • 1 look</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button class="choose-btn" onclick="selectPackage(this, 'Package 1 — $250')"
+                  >Choose this package</button
+                >
+              </div>
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Package 2</h3>
+                  <div class="price">$350</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>50–60 minute session</li>
+                    <li>2–3 locations • 3 looks</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Package 2 (Seniors) — $350')"
+                  >Choose this package</button
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Headshots -->
+          <div class="category">
+            <div class="category-header">Headshots</div>
+            <div class="vibe-grid">
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Basic</h3>
+                  <div class="price">$100</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>10–15 minute session</li>
+                    <li>5–10 photos</li>
+                    <li>1 location • 1 look</li>
+                    <li>Online gallery + print release</li>
+                  </ul>
+                </div>
+                <button class="choose-btn" onclick="selectPackage(this, 'Headshots — Basic — $100')"
+                  >Choose this package</button
+                >
+              </div>
+              <div class="vibe-card">
+                <div class="vibe-card-header">
+                  <h3>Entrepreneur</h3>
+                  <div class="price">$350</div>
+                </div>
+                <div class="vibe-details">
+                  <ul>
+                    <li>Individual or group — up to 5 people</li>
+                    <li>40-minute session</li>
+                    <li>1 location • 2 looks</li>
+                    <li>Online gallery + print release</li>
+                    <li>Additional $20 per extra person</li>
+                  </ul>
+                </div>
+                <button
+                  class="choose-btn"
+                  onclick="selectPackage(this, 'Headshots — Entrepreneur — $350')"
+                  >Choose this package</button
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" class="contact section">
+        <div class="contact-card reveal">
+          <h2>Let’s Create Together</h2>
+          <p>Tell me about the moments you want to remember. I’ll reply within 48 hours.</p>
+
+          <form action="https://formsubmit.co/elizabethaven.photography@hotmail.com" method="POST">
+            <input type="hidden" name="_subject" value="New Inquiry • Elizabeth Aven Photography" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_template" value="table" />
+
+            <div class="name-row">
+              <div class="form-group">
+                <label for="first-name">First Name</label>
+                <input id="first-name" type="text" name="First Name" required />
+              </div>
+              <div class="form-group">
+                <label for="last-name">Last Name</label>
+                <input id="last-name" type="text" name="Last Name" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input id="email" type="email" name="Email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="session-type">Session Type / Package</label>
+              <input
+                id="session-type"
+                type="text"
+                name="Session Type"
+                placeholder="e.g. Package 1 (Couples)"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Tell me about your vision</label>
+              <textarea
+                id="message"
+                name="Message"
+                placeholder="What are you celebrating? Any locations or feelings you love?"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send My Inquiry</button>
+          </form>
+        </div>
+      </section>
     </main>
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-logo">
-                <img src="assets/images/branding/logo.png" alt="Elizabeth Aven">
-                <div>
-                    <div class="footer-logo-text">Elizabeth Aven</div>
-                    <div style="font-size: 0.85rem; opacity: 0.65;">Photography • Navasota, Texas</div>
-                </div>
-            </div>
-            <div class="footer-links">
-                <a href="#" target="_blank" rel="noopener">Instagram</a>
-                <a href="#" target="_blank" rel="noopener">Facebook</a>
-            </div>
-            <div style="font-size: 0.85rem; opacity: 0.6;">© 2010 Elizabeth Aven Photography</div>
+      <div class="footer-content">
+        <div class="footer-logo">
+          <img src="assets/images/branding/logo.png" alt="Elizabeth Aven" />
+          <div>
+            <div class="footer-logo-text">Elizabeth Aven</div>
+            <div style="font-size: 0.85rem; opacity: 0.65;">Photography • Navasota, Texas</div>
+          </div>
         </div>
+        <div class="footer-links">
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+        </div>
+        <div style="font-size: 0.85rem; opacity: 0.6;">© 2010 Elizabeth Aven Photography</div>
+      </div>
     </footer>
 
     <script>
-        // ---------- Mobile menu ----------
-        const hamburger = document.getElementById('hamburger');
-        const navLinks = document.getElementById('nav-links');
+      // ---------- Mobile menu ----------
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
 
-        hamburger.addEventListener('click', () => {
-            const open = navLinks.classList.toggle('active');
-            hamburger.classList.toggle('open', open);
-            hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      hamburger.addEventListener("click", () => {
+        const open = navLinks.classList.toggle("active");
+        hamburger.classList.toggle("open", open);
+        hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      document.querySelectorAll(".nav-links a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navLinks.classList.remove("active");
+          hamburger.classList.remove("open");
+          hamburger.setAttribute("aria-expanded", "false");
         });
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                hamburger.classList.remove('open');
-                hamburger.setAttribute('aria-expanded', 'false');
-            });
-        });
+      });
 
-        // ---------- Rotating portfolio ----------
-        let portfolioPhotos = [];
+      // ---------- Rotating portfolio ----------
+      let portfolioPhotos = [];
 
-        const GALLERY_REPO = 'hankthuhtank/elizabethavenphotography';
-        const GALLERY_ROOT = 'assets/images/portfolio/';
-        const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif|avif)$/i;
+      const GALLERY_REPO = "hankthuhtank/elizabethavenphotography";
+      const GALLERY_ROOT = "assets/images/portfolio/";
+      const IMAGE_EXTENSIONS = /\.(jpe?g|png|webp|gif|avif)$/i;
 
-        function categoryLabel(folderName) {
-            return folderName
-                .replace(/[-_]+/g, ' ')
-                .replace(/\b\w/g, char => char.toUpperCase());
-        }
+      function categoryLabel(folderName) {
+        return folderName.replace(/[-_]+/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
+      }
 
-        function imagePath(path) {
-            return path.split('/').map(encodeURIComponent).join('/');
-        }
+      function imagePath(path) {
+        return path.split("/").map(encodeURIComponent).join("/");
+      }
 
-        async function loadPortfolioPhotos() {
-            try {
-                const response = await fetch(
-                    `https://api.github.com/repos/${GALLERY_REPO}/git/trees/main?recursive=1`,
-                    { cache: 'no-store', headers: { Accept: 'application/vnd.github+json' } }
-                );
-                if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
+      async function loadPortfolioPhotos() {
+        try {
+          const response = await fetch(
+            `https://api.github.com/repos/${GALLERY_REPO}/git/trees/main?recursive=1`,
+            { cache: "no-store", headers: { Accept: "application/vnd.github+json" } },
+          );
+          if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
 
-                const data = await response.json();
-                const photos = (data.tree || [])
-                    .filter(item =>
-                        item.type === 'blob' &&
-                        item.path.startsWith(GALLERY_ROOT) &&
-                        IMAGE_EXTENSIONS.test(item.path)
-                    )
-                    .map(item => {
-                        const relative = item.path.slice(GALLERY_ROOT.length);
-                        const parts = relative.split('/');
-                        if (parts.length < 2) return null;
+          const data = await response.json();
+          const photos = (data.tree || [])
+            .filter(
+              (item) =>
+                item.type === "blob" &&
+                item.path.startsWith(GALLERY_ROOT) &&
+                IMAGE_EXTENSIONS.test(item.path),
+            )
+            .map((item) => {
+              const relative = item.path.slice(GALLERY_ROOT.length);
+              const parts = relative.split("/");
+              if (parts.length < 2) return null;
 
-                        const folder = parts[0];
-                        const category = folder.toLowerCase();
-                        const label = categoryLabel(folder);
+              const folder = parts[0];
+              const category = folder.toLowerCase();
+              const label = categoryLabel(folder);
 
-                        return {
-                            src: imagePath(item.path),
-                            category,
-                            label,
-                            alt: `${label} photography`
-                        };
-                    })
-                    .filter(Boolean)
-                    .sort((a, b) =>
-                        a.category.localeCompare(b.category) ||
-                        a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: 'base' })
-                    );
-
-                if (!photos.length) throw new Error('No portfolio photos found');
-
-                portfolioPhotos = photos;
-                buildCategoryTabs();
-                activeCategory = 'all';
-                renderSet(randomSet(1), false);
-                restartAutoRotate();
-                startHeroRotation();
-            } catch (error) {
-                console.error('Could not load portfolio:', error);
-                collectionStatus.textContent = 'Portfolio photos could not be loaded right now.';
-            }
-        }
-
-        function buildCategoryTabs() {
-            const tabsContainer = document.getElementById('collection-tabs');
-            const categories = [...new Map(
-                portfolioPhotos.map(photo => [photo.category, photo.label])
-            ).entries()];
-
-            tabsContainer.innerHTML = '<button class="collection-tab active" type="button" data-category="all">All</button>';
-
-            categories.forEach(([category, label]) => {
-                const button = document.createElement('button');
-                button.className = 'collection-tab';
-                button.type = 'button';
-                button.dataset.category = category;
-                button.textContent = label;
-                tabsContainer.appendChild(button);
-            });
-
-            galleryTabs = Array.from(tabsContainer.querySelectorAll('.collection-tab'));
-            galleryTabs.forEach(tab =>
-                tab.addEventListener('click', () => setCategory(tab.dataset.category))
+              return {
+                src: imagePath(item.path),
+                category,
+                label,
+                alt: `${label} photography`,
+              };
+            })
+            .filter(Boolean)
+            .sort(
+              (a, b) =>
+                a.category.localeCompare(b.category) ||
+                a.src.localeCompare(b.src, undefined, { numeric: true, sensitivity: "base" }),
             );
+
+          if (!photos.length) throw new Error("No portfolio photos found");
+
+          portfolioPhotos = photos;
+          buildCategoryTabs();
+          activeCategory = "all";
+          renderSet(randomSet(1), false);
+          restartAutoRotate();
+          startHeroRotation();
+        } catch (error) {
+          console.error("Could not load portfolio:", error);
+          collectionStatus.textContent = "Portfolio photos could not be loaded right now.";
+        }
+      }
+
+      function buildCategoryTabs() {
+        const tabsContainer = document.getElementById("collection-tabs");
+        const categories = [
+          ...new Map(portfolioPhotos.map((photo) => [photo.category, photo.label])).entries(),
+        ];
+
+        tabsContainer.innerHTML =
+          '<button class="collection-tab active" type="button" data-category="all">All</button>';
+
+        categories.forEach(([category, label]) => {
+          const button = document.createElement("button");
+          button.className = "collection-tab";
+          button.type = "button";
+          button.dataset.category = category;
+          button.textContent = label;
+          tabsContainer.appendChild(button);
+        });
+
+        galleryTabs = Array.from(tabsContainer.querySelectorAll(".collection-tab"));
+        galleryTabs.forEach((tab) =>
+          tab.addEventListener("click", () => setCategory(tab.dataset.category)),
+        );
+      }
+
+      // ---------- Randomized hero photo ----------
+      const heroPhoto = document.getElementById("hero-photo");
+      let heroRotate;
+      let heroTargetRatio = 0;
+
+      function getImageRatio(src) {
+        return new Promise((resolve) => {
+          const image = new Image();
+          image.onload = () => resolve(image.naturalWidth / image.naturalHeight);
+          image.onerror = () => resolve(0);
+          image.src = src;
+        });
+      }
+
+      async function chooseHeroPhoto() {
+        if (!portfolioPhotos.length || !heroPhoto) return;
+
+        const currentSrc = heroPhoto.getAttribute("src");
+        const candidates = portfolioPhotos
+          .filter((photo) => photo.src !== currentSrc)
+          .sort(() => Math.random() - 0.5);
+
+        let chosen = null;
+
+        for (const photo of candidates.slice(0, 10)) {
+          const ratio = await getImageRatio(photo.src);
+          if (!ratio) continue;
+
+          if (!heroTargetRatio || Math.abs(ratio - heroTargetRatio) / heroTargetRatio <= 0.18) {
+            chosen = photo;
+            break;
+          }
         }
 
-        // ---------- Randomized hero photo ----------
-        const heroPhoto = document.getElementById('hero-photo');
-        let heroRotate;
-        let heroTargetRatio = 0;
+        if (!chosen) chosen = candidates[0];
+        if (!chosen) return;
 
-        function getImageRatio(src) {
-            return new Promise(resolve => {
-                const image = new Image();
-                image.onload = () => resolve(image.naturalWidth / image.naturalHeight);
-                image.onerror = () => resolve(0);
-                image.src = src;
+        const preload = new Image();
+
+        try {
+          await new Promise((resolve, reject) => {
+            preload.onload = resolve;
+            preload.onerror = reject;
+            preload.src = chosen.src;
+            if (preload.complete && preload.naturalWidth) resolve();
+          });
+        } catch {
+          return;
+        }
+
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!reduceMotion) {
+          heroPhoto.classList.add("hero-changing");
+          await new Promise((resolve) => window.setTimeout(resolve, 450));
+        }
+
+        heroPhoto.src = chosen.src;
+        heroPhoto.alt = chosen.alt;
+
+        if (!reduceMotion) {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              heroPhoto.classList.remove("hero-changing");
             });
+          });
+        }
+      }
+
+      async function startHeroRotation() {
+        if (!heroPhoto || !portfolioPhotos.length) return;
+
+        window.clearInterval(heroRotate);
+
+        if (heroPhoto.complete && heroPhoto.naturalWidth) {
+          heroTargetRatio = heroPhoto.naturalWidth / heroPhoto.naturalHeight;
+        } else {
+          heroTargetRatio = await getImageRatio(heroPhoto.getAttribute("src"));
         }
 
-        async function chooseHeroPhoto() {
-            if (!portfolioPhotos.length || !heroPhoto) return;
+        await chooseHeroPhoto();
 
-            const currentSrc = heroPhoto.getAttribute('src');
-            const candidates = portfolioPhotos
-                .filter(photo => photo.src !== currentSrc)
-                .sort(() => Math.random() - 0.5);
+        heroRotate = window.setInterval(chooseHeroPhoto, 8000);
+      }
 
-            let chosen = null;
+      const gallerySlots = Array.from(document.querySelectorAll("[data-gallery-slot]"));
+      let galleryTabs = [];
+      const collectionStatus = document.getElementById("collection-status");
+      const modal = document.getElementById("gallery-modal");
+      const modalGrid = document.getElementById("full-gallery-grid");
+      const modalClose = document.getElementById("gallery-modal-close");
+      const openGalleryButton = document.getElementById("open-gallery");
+      let activeCategory = "all";
+      let currentSet = [];
+      let autoRotate;
 
-            for (const photo of candidates.slice(0, 10)) {
-                const ratio = await getImageRatio(photo.src);
-                if (!ratio) continue;
+      function poolForCategory() {
+        return activeCategory === "all"
+          ? portfolioPhotos
+          : portfolioPhotos.filter((photo) => photo.category === activeCategory);
+      }
 
-                if (!heroTargetRatio || Math.abs(ratio - heroTargetRatio) / heroTargetRatio <= 0.18) {
-                    chosen = photo;
-                    break;
-                }
+      function randomSet(direction = 1) {
+        const pool = poolForCategory();
+        if (!pool.length) return [];
+        const previous = new Set(currentSet.map((photo) => photo.src));
+        const fresh = pool.filter((photo) => !previous.has(photo.src));
+        const source = fresh.length >= Math.min(3, pool.length) ? fresh : [...pool];
+        const shuffled = [...source].sort(() => Math.random() - 0.5);
+        const needed = Math.min(3, pool.length);
+        return shuffled.slice(0, needed);
+      }
+
+      function renderSet(nextSet, animate = true) {
+        currentSet = nextSet;
+        gallerySlots.forEach((slot, index) => {
+          const photo = nextSet[index];
+          slot.hidden = !photo;
+          if (!photo) return;
+          if (animate) slot.classList.add("is-changing");
+          window.setTimeout(
+            () => {
+              const image = slot.querySelector("img");
+              const label = slot.querySelector(".gallery-caption strong");
+              image.src = photo.src;
+              image.alt = photo.alt;
+              label.textContent = photo.label;
+              slot.dataset.photoSrc = photo.src;
+              slot.dataset.photoCategory = photo.category;
+              if (animate) requestAnimationFrame(() => slot.classList.remove("is-changing"));
+            },
+            animate ? 180 : 0,
+          );
+        });
+
+        const pool = poolForCategory();
+        const categoryLabel =
+          activeCategory === "all"
+            ? "the full portfolio"
+            : nextSet[0]
+              ? nextSet[0].label.toLowerCase()
+              : activeCategory;
+        collectionStatus.textContent = `Showing ${Math.min(3, pool.length)} of ${pool.length} photos from ${categoryLabel}. The selection refreshes automatically.`;
+      }
+
+      function cycleGallery(direction = 1) {
+        renderSet(randomSet(direction));
+        restartAutoRotate();
+      }
+
+      function restartAutoRotate() {
+        window.clearInterval(autoRotate);
+        autoRotate = window.setInterval(() => {
+          const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          renderSet(randomSet(1), !reduceMotion);
+        }, 6500);
+      }
+
+      function setCategory(category) {
+        activeCategory = category;
+        galleryTabs.forEach((tab) => tab.classList.toggle("active", tab.dataset.category === category));
+        renderSet(randomSet(1));
+        restartAutoRotate();
+      }
+
+      document.getElementById("gallery-prev").addEventListener("click", () => cycleGallery(-1));
+      document.getElementById("gallery-next").addEventListener("click", () => cycleGallery(1));
+      document.getElementById("gallery-shuffle").addEventListener("click", () => cycleGallery(1));
+
+      function renderFullGallery() {
+        const pool = poolForCategory();
+        modalGrid.innerHTML = "";
+        pool.forEach((photo) => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "full-gallery-item";
+          button.setAttribute("aria-label", `Feature this ${photo.label.toLowerCase()} photo`);
+          button.innerHTML = `<img src="${photo.src}" alt="${photo.alt}" loading="lazy">`;
+          button.addEventListener("click", () => {
+            const sameCategory = activeCategory === "all" || activeCategory === photo.category;
+            const poolNow = sameCategory ? poolForCategory() : portfolioPhotos;
+            const others = poolNow
+              .filter((item) => item.src !== photo.src)
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 2);
+            renderSet([photo, ...others]);
+            closeGalleryModal();
+            document
+              .getElementById("collection-shell")
+              .scrollIntoView({ behavior: "smooth", block: "center" });
+          });
+          modalGrid.appendChild(button);
+        });
+      }
+
+      function openGalleryModal() {
+        renderFullGallery();
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.classList.add("gallery-open");
+        modalClose.focus();
+      }
+
+      function closeGalleryModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("gallery-open");
+      }
+
+      openGalleryButton.addEventListener("click", openGalleryModal);
+      gallerySlots.forEach((slot) => slot.addEventListener("click", openGalleryModal));
+      modalClose.addEventListener("click", closeGalleryModal);
+      modal.addEventListener("click", (event) => {
+        if (event.target === modal) closeGalleryModal();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && modal.classList.contains("open")) closeGalleryModal();
+      });
+
+      loadPortfolioPhotos();
+
+      // ---------- Scroll reveal ----------
+      const reveals = document.querySelectorAll(".reveal");
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              io.unobserve(entry.target);
             }
+          });
+        },
+        { threshold: 0.12 },
+      );
+      reveals.forEach((el) => io.observe(el));
 
-            if (!chosen) chosen = candidates[0];
-            if (!chosen) return;
+      // ---------- Package selection ----------
+      function selectPackage(button, packageName) {
+        document.querySelectorAll(".vibe-card").forEach((card) => card.classList.remove("selected"));
+        button.closest(".vibe-card").classList.add("selected");
+        const input = document.getElementById("session-type");
+        input.value = packageName;
+        setTimeout(() => {
+          document.getElementById("contact").scrollIntoView({ behavior: "smooth", block: "start" });
+          input.style.boxShadow = "0 0 0 4px rgba(193, 127, 89, 0.18)";
+          setTimeout(() => {
+            input.style.boxShadow = "none";
+          }, 1400);
+        }, 380);
+      }
 
-            const preload = new Image();
+      // ---------- Site-wide ambient particle field ----------
+      (function initParticles() {
+        const canvas = document.getElementById("bg-canvas");
+        if (!canvas || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          if (canvas) canvas.style.display = "none";
+          return;
+        }
+        const ctx = canvas.getContext("2d", { alpha: true });
+        let w,
+          h,
+          dpr,
+          particles = [];
 
-            try {
-                await new Promise((resolve, reject) => {
-                    preload.onload = resolve;
-                    preload.onerror = reject;
-                    preload.src = chosen.src;
-                    if (preload.complete && preload.naturalWidth) resolve();
-                });
-            } catch {
-                return;
-            }
-
-            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (!reduceMotion) {
-                heroPhoto.classList.add('hero-changing');
-                await new Promise(resolve => window.setTimeout(resolve, 450));
-            }
-
-            heroPhoto.src = chosen.src;
-            heroPhoto.alt = chosen.alt;
-
-            if (!reduceMotion) {
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        heroPhoto.classList.remove('hero-changing');
-                    });
-                });
-            }
+        function size() {
+          dpr = Math.min(window.devicePixelRatio || 1, 2);
+          w = window.innerWidth;
+          h = window.innerHeight;
+          canvas.width = w * dpr;
+          canvas.height = h * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          // density scales with viewport, capped for performance
+          const target = Math.min(70, Math.round((w * h) / 26000));
+          if (particles.length !== target) {
+            particles = Array.from({ length: target }, () => new Particle());
+          }
         }
 
-        async function startHeroRotation() {
-            if (!heroPhoto || !portfolioPhotos.length) return;
-
-            window.clearInterval(heroRotate);
-
-            if (heroPhoto.complete && heroPhoto.naturalWidth) {
-                heroTargetRatio = heroPhoto.naturalWidth / heroPhoto.naturalHeight;
-            } else {
-                heroTargetRatio = await getImageRatio(heroPhoto.getAttribute('src'));
-            }
-
-            await chooseHeroPhoto();
-
-            heroRotate = window.setInterval(chooseHeroPhoto, 8000);
+        class Particle {
+          constructor() {
+            this.reset(true);
+          }
+          reset(spawnAnywhere) {
+            this.x = Math.random() * w;
+            this.y = spawnAnywhere ? Math.random() * h : h + 10;
+            this.size = Math.random() * 2.2 + 0.7;
+            this.speed = Math.random() * 0.32 + 0.1;
+            this.opacity = Math.random() * 0.32 + 0.12;
+            this.angle = Math.random() * Math.PI * 2;
+            this.drift = Math.random() * 0.4 + 0.1;
+            // warm palette: amber / taupe motes
+            this.hue = Math.random() > 0.5 ? "200,140,90" : "168,137,108";
+          }
+          update() {
+            this.y -= this.speed;
+            this.angle += 0.006;
+            this.x += Math.sin(this.angle) * this.drift;
+            if (this.y < -10) this.reset(false);
+          }
+          draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(" + this.hue + "," + this.opacity + ")";
+            ctx.fill();
+          }
         }
 
-        const gallerySlots = Array.from(document.querySelectorAll('[data-gallery-slot]'));
-        let galleryTabs = [];
-        const collectionStatus = document.getElementById('collection-status');
-        const modal = document.getElementById('gallery-modal');
-        const modalGrid = document.getElementById('full-gallery-grid');
-        const modalClose = document.getElementById('gallery-modal-close');
-        const openGalleryButton = document.getElementById('open-gallery');
-        let activeCategory = 'all';
-        let currentSet = [];
-        let autoRotate;
-
-        function poolForCategory() {
-            return activeCategory === 'all'
-                ? portfolioPhotos
-                : portfolioPhotos.filter(photo => photo.category === activeCategory);
+        let raf;
+        function animate() {
+          ctx.clearRect(0, 0, w, h);
+          for (const p of particles) {
+            p.update();
+            p.draw();
+          }
+          raf = requestAnimationFrame(animate);
         }
 
-        function randomSet(direction = 1) {
-            const pool = poolForCategory();
-            if (!pool.length) return [];
-            const previous = new Set(currentSet.map(photo => photo.src));
-            const fresh = pool.filter(photo => !previous.has(photo.src));
-            const source = fresh.length >= Math.min(3, pool.length) ? fresh : [...pool];
-            const shuffled = [...source].sort(() => Math.random() - 0.5);
-            const needed = Math.min(3, pool.length);
-            return shuffled.slice(0, needed);
-        }
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(size, 150);
+        });
 
-        function renderSet(nextSet, animate = true) {
-            currentSet = nextSet;
-            gallerySlots.forEach((slot, index) => {
-                const photo = nextSet[index];
-                slot.hidden = !photo;
-                if (!photo) return;
-                if (animate) slot.classList.add('is-changing');
-                window.setTimeout(() => {
-                    const image = slot.querySelector('img');
-                    const label = slot.querySelector('.gallery-caption strong');
-                    image.src = photo.src;
-                    image.alt = photo.alt;
-                    label.textContent = photo.label;
-                    slot.dataset.photoSrc = photo.src;
-                    slot.dataset.photoCategory = photo.category;
-                    if (animate) requestAnimationFrame(() => slot.classList.remove('is-changing'));
-                }, animate ? 180 : 0);
-            });
-
-            const pool = poolForCategory();
-            const categoryLabel = activeCategory === 'all'
-                ? 'the full portfolio'
-                : (nextSet[0] ? nextSet[0].label.toLowerCase() : activeCategory);
-            collectionStatus.textContent = `Showing ${Math.min(3, pool.length)} of ${pool.length} photos from ${categoryLabel}. The selection refreshes automatically.`;
-        }
-
-        function cycleGallery(direction = 1) {
-            renderSet(randomSet(direction));
-            restartAutoRotate();
-        }
-
-        function restartAutoRotate() {
-            window.clearInterval(autoRotate);
-            autoRotate = window.setInterval(() => {
-                const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                renderSet(randomSet(1), !reduceMotion);
-            }, 6500);
-        }
-
-        function setCategory(category) {
-            activeCategory = category;
-            galleryTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.category === category));
-            renderSet(randomSet(1));
-            restartAutoRotate();
-        }
-
-        document.getElementById('gallery-prev').addEventListener('click', () => cycleGallery(-1));
-        document.getElementById('gallery-next').addEventListener('click', () => cycleGallery(1));
-        document.getElementById('gallery-shuffle').addEventListener('click', () => cycleGallery(1));
-
-        function renderFullGallery() {
-            const pool = poolForCategory();
-            modalGrid.innerHTML = '';
-            pool.forEach(photo => {
-                const button = document.createElement('button');
-                button.type = 'button';
-                button.className = 'full-gallery-item';
-                button.setAttribute('aria-label', `Feature this ${photo.label.toLowerCase()} photo`);
-                button.innerHTML = `<img src="${photo.src}" alt="${photo.alt}" loading="lazy">`;
-                button.addEventListener('click', () => {
-                    const sameCategory = activeCategory === 'all' || activeCategory === photo.category;
-                    const poolNow = sameCategory ? poolForCategory() : portfolioPhotos;
-                    const others = poolNow.filter(item => item.src !== photo.src).sort(() => Math.random() - 0.5).slice(0, 2);
-                    renderSet([photo, ...others]);
-                    closeGalleryModal();
-                    document.getElementById('collection-shell').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                });
-                modalGrid.appendChild(button);
-            });
-        }
-
-        function openGalleryModal() {
-            renderFullGallery();
-            modal.classList.add('open');
-            modal.setAttribute('aria-hidden', 'false');
-            document.body.classList.add('gallery-open');
-            modalClose.focus();
-        }
-
-        function closeGalleryModal() {
-            modal.classList.remove('open');
-            modal.setAttribute('aria-hidden', 'true');
-            document.body.classList.remove('gallery-open');
-        }
-
-        openGalleryButton.addEventListener('click', openGalleryModal);
-        gallerySlots.forEach(slot => slot.addEventListener('click', openGalleryModal));
-        modalClose.addEventListener('click', closeGalleryModal);
-        modal.addEventListener('click', (event) => { if (event.target === modal) closeGalleryModal(); });
-        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && modal.classList.contains('open')) closeGalleryModal(); });
-
-        loadPortfolioPhotos();
-
-        // ---------- Scroll reveal ----------
-        const reveals = document.querySelectorAll('.reveal');
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    io.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        reveals.forEach(el => io.observe(el));
-
-        // ---------- Package selection ----------
-        function selectPackage(button, packageName) {
-            document.querySelectorAll('.vibe-card').forEach(card => card.classList.remove('selected'));
-            button.closest('.vibe-card').classList.add('selected');
-            const input = document.getElementById('session-type');
-            input.value = packageName;
-            setTimeout(() => {
-                document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                input.style.boxShadow = '0 0 0 4px rgba(193, 127, 89, 0.18)';
-                setTimeout(() => { input.style.boxShadow = 'none'; }, 1400);
-            }, 380);
-        }
-
-        // ---------- Site-wide ambient particle field ----------
-        (function initParticles() {
-            const canvas = document.getElementById('bg-canvas');
-            if (!canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                if (canvas) canvas.style.display = 'none';
-                return;
-            }
-            const ctx = canvas.getContext('2d', { alpha: true });
-            let w, h, dpr, particles = [];
-
-            function size() {
-                dpr = Math.min(window.devicePixelRatio || 1, 2);
-                w = window.innerWidth;
-                h = window.innerHeight;
-                canvas.width = w * dpr;
-                canvas.height = h * dpr;
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                // density scales with viewport, capped for performance
-                const target = Math.min(70, Math.round((w * h) / 26000));
-                if (particles.length !== target) {
-                    particles = Array.from({ length: target }, () => new Particle());
-                }
-            }
-
-            class Particle {
-                constructor() { this.reset(true); }
-                reset(spawnAnywhere) {
-                    this.x = Math.random() * w;
-                    this.y = spawnAnywhere ? Math.random() * h : h + 10;
-                    this.size = Math.random() * 2.2 + 0.7;
-                    this.speed = Math.random() * 0.32 + 0.1;
-                    this.opacity = Math.random() * 0.32 + 0.12;
-                    this.angle = Math.random() * Math.PI * 2;
-                    this.drift = Math.random() * 0.4 + 0.1;
-                    // warm palette: amber / taupe motes
-                    this.hue = Math.random() > 0.5 ? '200,140,90' : '168,137,108';
-                }
-                update() {
-                    this.y -= this.speed;
-                    this.angle += 0.006;
-                    this.x += Math.sin(this.angle) * this.drift;
-                    if (this.y < -10) this.reset(false);
-                }
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = 'rgba(' + this.hue + ',' + this.opacity + ')';
-                    ctx.fill();
-                }
-            }
-
-            let raf;
-            function animate() {
-                ctx.clearRect(0, 0, w, h);
-                for (const p of particles) { p.update(); p.draw(); }
-                raf = requestAnimationFrame(animate);
-            }
-
-            let resizeTimer;
-            window.addEventListener('resize', () => {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(size, 150);
-            });
-
-            // pause when tab is hidden (saves battery on mobile)
-            document.addEventListener('visibilitychange', () => {
-                if (document.hidden) { cancelAnimationFrame(raf); }
-                else { animate(); }
-            });
-
-            size();
+        // pause when tab is hidden (saves battery on mobile)
+        document.addEventListener("visibilitychange", () => {
+          if (document.hidden) {
+            cancelAnimationFrame(raf);
+          } else {
             animate();
-        })();
+          }
+        });
+
+        size();
+        animate();
+      })();
     </script>
-</body>
+  </body>
 </html>
