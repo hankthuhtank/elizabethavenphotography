@@ -310,19 +310,12 @@
 
       .featured-gallery {
         display: grid;
-        grid-template-columns: minmax(0, 1.45fr) minmax(220px, 0.72fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 0.9rem;
-        min-height: 560px;
-      }
-
-      .gallery-side {
-        display: grid;
-        grid-template-rows: 1fr 1fr;
-        gap: 0.9rem;
-        min-height: 0;
       }
 
       .gallery-card {
+        aspect-ratio: 3 / 4;
         position: relative;
         width: 100%;
         min-height: 0;
@@ -352,13 +345,6 @@
         background: linear-gradient(180deg, transparent 52%, rgba(25, 20, 17, 0.68) 100%);
         z-index: 1;
         pointer-events: none;
-      }
-
-      .gallery-card-main {
-        min-height: 560px;
-      }
-      .gallery-card-small {
-        min-height: 0;
       }
 
       .gallery-caption {
@@ -415,30 +401,19 @@
         .collection-toolbar {
           align-items: flex-start;
         }
-          .featured-gallery {
-          grid-template-columns: 1fr;
+        .featured-gallery {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
           min-height: 0;
-        }
-        .gallery-card-main {
-          min-height: 470px;
-        }
-        .gallery-side {
-          grid-template-columns: 1fr 1fr;
-          grid-template-rows: none;
-          min-height: 210px;
-        }
-        .gallery-card-small {
-          min-height: 210px;
         }
         .gallery-caption {
           left: 0.9rem;
           right: 0.9rem;
           bottom: 0.8rem;
         }
-        .gallery-card-small .gallery-caption strong {
+        .gallery-card .gallery-caption strong {
           font-size: 0.88rem;
         }
-        .gallery-card-small .gallery-caption span {
+        .gallery-card .gallery-caption span {
           display: none;
         }
         .collection-footer {
@@ -450,17 +425,6 @@
         }
       }
 
-      @media (max-width: 480px) {
-        .gallery-card-main {
-          min-height: 410px;
-        }
-        .gallery-side {
-          min-height: 170px;
-        }
-        .gallery-card-small {
-          min-height: 170px;
-        }
-      }
 
       /* ===================== PRICING ===================== */
       .pricing {
@@ -666,22 +630,24 @@
       .form-group input,
       .form-group textarea {
         width: 100%;
-        padding: 14px 0;
-        background: transparent;
-        border: none;
-        border-bottom: 2px solid #ede4d8;
+        padding: 14px 16px;
+        background: #faf9f7;
+        border: 1px solid #bbb2a8;
+        border-radius: 10px;
         font-size: 1.02rem;
         font-family: "Outfit", sans-serif;
         color: var(--oak);
-        transition: border-color 0.2s ease;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
       .form-group input:focus,
       .form-group textarea:focus {
-        outline: none;
-        border-bottom-color: var(--ember);
+        outline: 2px solid var(--oak);
+        outline-offset: 2px;
+        border-color: var(--oak);
+        background: #fff;
       }
       .form-group textarea {
-        min-height: 120px;
+        min-height: 150px;
         resize: vertical;
       }
 
@@ -910,9 +876,9 @@
       section[id] { scroll-margin-top: 115px; }
       @media (max-width: 899px) {
         .hero { padding-top: 126px; padding-bottom: 42px; }
-        .hero-grid { grid-template-columns: 1fr; gap: 1.8rem; }
-        .hero-mark { width: min(100%, 460px); justify-self: center; }
-        .hero-image { width: min(100%, 470px); justify-self: center; }
+        .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1rem; }
+        .hero-mark { width: 100%; }
+        .hero-image { width: 100%; }
         .hero-image img { max-height: none; }
       }
     </style>
@@ -1011,33 +977,22 @@
           </div>
 
           <div class="featured-gallery" aria-live="polite">
-            <a class="gallery-card gallery-card-main" data-gallery-slot="0" href="gallery.html#couples" aria-label="View all photographs">
-              <img
-                src="assets/images/portfolio/couples/couple3.jpg"
-                alt="Couple sharing a candid moment indoors"
-              />
-              <span class="gallery-caption"><strong>Couples</strong><span>Featured</span></span>
+            <a class="gallery-card" data-gallery-slot="0" href="gallery.html#couples" aria-label="View couples photographs">
+              <img src="assets/images/portfolio/couples/couple1.jpg" alt="Couple together outdoors" loading="lazy" />
+              <span class="gallery-caption"><strong>Couples</strong></span>
             </a>
-            <div class="gallery-side">
-              <a class="gallery-card gallery-card-small" data-gallery-slot="1" href="gallery.html#families" aria-label="View all photographs">
-                <img
-                  src="assets/images/portfolio/families/family6.jpg"
-                  alt="Family portrait outdoors"
-                />
-                <span class="gallery-caption"
-                  ><strong>Families</strong><span>Collection</span></span
-                >
-              </a>
-              <a class="gallery-card gallery-card-small" data-gallery-slot="2" href="gallery.html#headshots" aria-label="View all photographs">
-                <img
-                  src="assets/images/portfolio/headshots/headshot5.jpg"
-                  alt="Professional portrait"
-                />
-                <span class="gallery-caption"
-                  ><strong>Headshots</strong><span>Collection</span></span
-                >
-              </a>
-            </div>
+            <a class="gallery-card" data-gallery-slot="1" href="gallery.html#families" aria-label="View families photographs">
+              <img src="assets/images/portfolio/families/family6.jpg" alt="Family portrait outdoors" loading="lazy" />
+              <span class="gallery-caption"><strong>Families</strong></span>
+            </a>
+            <a class="gallery-card" data-gallery-slot="2" href="gallery.html#headshots" aria-label="View headshots photographs">
+              <img src="assets/images/portfolio/headshots/headshot2.jpg" alt="Professional portrait" loading="lazy" />
+              <span class="gallery-caption"><strong>Headshots</strong></span>
+            </a>
+            <a class="gallery-card" data-gallery-slot="3" href="gallery.html#seniors" aria-label="View seniors photographs">
+              <img src="assets/images/portfolio/seniors/senior6.jpg" alt="Senior portrait" loading="lazy" />
+              <span class="gallery-caption"><strong>Seniors</strong></span>
+            </a>
           </div>
 
           <div class="collection-footer">
@@ -1289,7 +1244,7 @@
               <textarea
                 id="message"
                 name="Message"
-                placeholder="Message"
+                placeholder="Share a little about your session…"
                 required
               ></textarea>
             </div>
@@ -1334,6 +1289,7 @@
 
       // Fixed previews: photos only change when a visitor chooses a collection.
       const portfolioPhotos = [{"src": "assets/images/portfolio/couples/couple1.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/couples/couple2.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/couples/couple3.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/couples/couple4.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/couples/couple5.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/couples/couple6.jpg", "category": "couples", "label": "Couples"}, {"src": "assets/images/portfolio/families/family1.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family2.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family3.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family4.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family5.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family6.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family7.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family8.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family9.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/families/family10.jpg", "category": "families", "label": "Families"}, {"src": "assets/images/portfolio/headshots/headshot1.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/headshots/headshot2.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/headshots/headshot3.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/headshots/headshot4.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/headshots/headshot5.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/headshots/headshot6.jpg", "category": "headshots", "label": "Headshots"}, {"src": "assets/images/portfolio/seniors/senior1.jpg", "category": "seniors", "label": "Seniors"}, {"src": "assets/images/portfolio/seniors/senior2.jpg", "category": "seniors", "label": "Seniors"}, {"src": "assets/images/portfolio/seniors/senior3.jpg", "category": "seniors", "label": "Seniors"}, {"src": "assets/images/portfolio/seniors/senior4.jpg", "category": "seniors", "label": "Seniors"}, {"src": "assets/images/portfolio/seniors/senior5.jpg", "category": "seniors", "label": "Seniors"}, {"src": "assets/images/portfolio/seniors/senior6.jpg", "category": "seniors", "label": "Seniors"}];
+      const previewPaths = ['couples/couple1.jpg', 'families/family6.jpg', 'headshots/headshot2.jpg', 'seniors/senior6.jpg'];
       const slots = [...document.querySelectorAll('[data-gallery-slot]')];
       const tabs = document.getElementById('collection-tabs');
       for (const category of ['couples', 'families', 'headshots', 'seniors']) {
@@ -1353,15 +1309,17 @@
           button.classList.toggle('active', active);
           button.setAttribute('aria-pressed', String(active));
         });
+        const featured = previewPaths.map(path => portfolioPhotos.find(photo => photo.src.endsWith(path)));
         const photos = category === 'all'
-          ? ['couples/couple3.jpg', 'families/family6.jpg', 'headshots/headshot5.jpg'].map(path => portfolioPhotos.find(photo => photo.src.endsWith(path)))
-          : portfolioPhotos.filter(photo => photo.category === category).slice(0, 3);
+          ? featured
+          : [featured.find(photo => photo.category === category), ...portfolioPhotos.filter(photo => photo.category === category && !previewPaths.some(path => photo.src.endsWith(path)))].slice(0, slots.length);
         slots.forEach((slot, index) => {
           const photo = photos[index];
           slot.querySelector('img').src = photo.src;
           slot.querySelector('img').alt = photo.label + ' photography';
           slot.querySelector('strong').textContent = photo.label;
           slot.href = 'gallery.html#' + photo.category;
+          slot.setAttribute('aria-label', 'View ' + photo.category + ' photographs');
         });
       });
       tabs.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === 'all')));
