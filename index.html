@@ -866,20 +866,16 @@
       .nav-mark { width: 132px; }
       .footer-mark { width: 220px; }
       .hero { padding-top: 132px; padding-bottom: 64px; }
-      .hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); }
-      .hero-mark { width: 100%; margin: 0; }
-      .hero-image { display: block; }
-      .hero-image img { display: block; width: 100%; height: auto; max-height: 690px; object-fit: contain; }
+      .hero-grid { display: grid; grid-template-columns: 1fr; justify-items: center; }
+      .hero-image { display: block; width: min(100%, 560px); margin: 0; }
+      .hero-image img { display: block; width: 100%; height: auto; object-fit: contain; }
       .open-gallery { display: inline-block; text-decoration: none; text-align: center; }
       .gallery-card { text-decoration: none; }
       .portrait-frame a { display: block; }
       section[id] { scroll-margin-top: 115px; }
       @media (max-width: 899px) {
         .hero { padding-top: 126px; padding-bottom: 42px; }
-        .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 1rem; }
-        .hero-mark { width: 100%; }
-        .hero-image { width: 100%; }
-        .hero-image img { max-height: none; }
+        .hero-image { width: min(100%, 480px); }
       }
     </style>
   </head>
@@ -906,10 +902,11 @@
       <!-- HERO -->
       <section class="hero section" aria-label="Elizabeth Aven Photography">
         <div class="hero-grid">
-          <h1 class="brand-art hero-mark"><img src="assets/images/branding/logo.png?v=20261107" alt="Elizabeth Aven Photography" width="2000" height="2000" fetchpriority="high" /></h1>
-          <a class="hero-image" href="gallery.html#couples" aria-label="View all photographs">
-            <img id="hero-photo" src="assets/images/portfolio/couples/couple3.jpg" alt="Couple sharing a candid moment indoors" width="1334" height="2048" fetchpriority="high" />
-          </a>
+          <h1 class="hero-image">
+            <a href="gallery.html#couples" aria-label="View all photographs">
+              <img id="hero-photo" src="assets/images/branding/hero-watermarked.jpg" alt="Elizabeth Aven Photography — couple sharing a moment in a doorway" width="1012" height="1554" fetchpriority="high" />
+            </a>
+          </h1>
         </div>
       </section>
 
